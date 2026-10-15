@@ -2,25 +2,55 @@
   "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 16
+    "minor": 21
   },
   "configurePresets": [
     {
-      "name": "default",
-      "displayName": "Default UCRT64 GCC Configuration",
+      "name": "base",
+      "hidden": true,
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "windows",
+      "inherits": "base",
+      "displayName": "Windows UCRT64 GCC",
+      "binaryDir": "${sourceDir}/build/windows",
+      "environment": {
+        "PATH": "C:/msys64/ucrt64/bin;$penv{PATH}"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
+        "CMAKE_PREFIX_PATH": "C:/msys64/ucrt64"
+      }
+    },
+    {
+      "name": "linux",
+      "inherits": "base",
+      "displayName": "Linux GCC",
+      "binaryDir": "${sourceDir}/build/linux",
+      "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "macos",
+      "inherits": "base",
+      "displayName": "macOS Clang",
+      "binaryDir": "${sourceDir}/build/macos",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
       }
     }
   ],
   "buildPresets": [
-    {
-      "name": "default",
-      "configurePreset": "default"
-    }
+    { "name": "windows", "configurePreset": "windows" },
+    { "name": "linux", "configurePreset": "linux" },
+    { "name": "macos", "configurePreset": "macos" }
   ]
 }
