@@ -37,7 +37,7 @@ cd HexGame
 ```bash
 cmake -B build -S .
 ```
-3, **Build the project::**
+3, **Build the project:**
     Compile the source code using generated build files.
 ```bash
 cmake --build build
