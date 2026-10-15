@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/atlas/coding/dsaAssignments/HexGame/build",
+  "command": "/usr/bin/c++  -I/home/atlas/coding/dsaAssignments/HexGame/include -std=gnu++17 -o CMakeFiles/hexLauncher.dir/src/main.cpp.o -c /home/atlas/coding/dsaAssignments/HexGame/src/main.cpp",
+  "file": "/home/atlas/coding/dsaAssignments/HexGame/src/main.cpp",
+  "output": "CMakeFiles/hexLauncher.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/atlas/coding/dsaAssignments/HexGame/build",
+  "command": "/usr/bin/c++  -I/home/atlas/coding/dsaAssignments/HexGame/include -std=gnu++17 -o CMakeFiles/hexLauncher.dir/src/SDL_Plotter.cpp.o -c /home/atlas/coding/dsaAssignments/HexGame/src/SDL_Plotter.cpp",
+  "file": "/home/atlas/coding/dsaAssignments/HexGame/src/SDL_Plotter.cpp",
+  "output": "CMakeFiles/hexLauncher.dir/src/SDL_Plotter.cpp.o"
+}
+]

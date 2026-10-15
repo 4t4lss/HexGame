@@ -1,0 +1,123 @@
+{
+	"configurations" : 
+	[
+		{
+			"abstractTargets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "PkgConfig::PC_LIBUNWIND::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PkgConfig__PC_LIBUNWIND-ea2bb886b72f4161cd99.json",
+					"name" : "PkgConfig::PC_LIBUNWIND",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::Headers::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__Headers-9845df29b9777e4098f6.json",
+					"name" : "SDL3::Headers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3-shared-ed08be3771e5cd93c582.json",
+					"name" : "SDL3::SDL3-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3::SDL3_test::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3__SDL3_test-0b256e1d414d0c9bacb3.json",
+					"name" : "SDL3::SDL3_test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_mixer::SDL3_mixer-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_mixer__SDL3_mixer-shared-e0a7dfbf4fe17af576d0.json",
+					"name" : "SDL3_mixer::SDL3_mixer-shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SDL3_ttf::SDL3_ttf-shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SDL3_ttf__SDL3_ttf-shared-1ba35d77bd747679b7d6.json",
+					"name" : "SDL3_ttf::SDL3_ttf-shared",
+					"projectIndex" : 0
+				}
+			],
+			"directories" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"build" : ".",
+					"jsonFile" : "directory-.-b23a0b23c080df4d29ba.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"abstractTargetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "HexGame",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "hexLauncher::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-hexLauncher-2a6ef67d403cc7ac3396.json",
+					"name" : "hexLauncher",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/atlas/coding/dsaAssignments/HexGame/build",
+		"source" : "/home/atlas/coding/dsaAssignments/HexGame"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 11
+	}
+}

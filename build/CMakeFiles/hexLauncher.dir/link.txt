@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/hexLauncher.dir/link.d CMakeFiles/hexLauncher.dir/src/main.cpp.o CMakeFiles/hexLauncher.dir/src/SDL_Plotter.cpp.o -o hexLauncher  /usr/lib/libSDL3_mixer.so.0.2.4 /usr/lib/libSDL3_ttf.so.0.2.2 /usr/lib/libSDL3.so.0.4.18
