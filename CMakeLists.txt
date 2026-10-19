@@ -11,7 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # locate sdl packages automatically
 find_package(SDL3 REQUIRED)
 find_package(SDL3_mixer REQUIRED)
-find_package(SDL3_ttf REQUIRED)
 
 # define executable name
 add_executable(hexLauncher)
