@@ -17,12 +17,11 @@
       "name": "windows",
       "inherits": "base",
       "displayName": "Windows UCRT64 GCC",
-      "binaryDir": "${sourceDir}/build/windows",
+      "binaryDir": "${sourceDir}/build",
       "environment": {
         "PATH": "C:/msys64/ucrt64/bin;$penv{PATH}"
       },
       "cacheVariables": {
-        "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
         "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe",
         "CMAKE_PREFIX_PATH": "C:/msys64/ucrt64"
       }
@@ -31,9 +30,8 @@
       "name": "linux",
       "inherits": "base",
       "displayName": "Linux GCC",
-      "binaryDir": "${sourceDir}/build/linux",
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
-        "CMAKE_C_COMPILER": "gcc",
         "CMAKE_CXX_COMPILER": "g++"
       }
     },
@@ -41,7 +39,7 @@
       "name": "macos",
       "inherits": "base",
       "displayName": "macOS Clang",
-      "binaryDir": "${sourceDir}/build/macos",
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_COMPILER": "clang++"

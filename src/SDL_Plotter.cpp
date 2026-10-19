@@ -31,18 +31,18 @@
 
 namespace {
 
-/** Packed ARGB8888 value used by clear() for an opaque white pixel. */
-const Uint32 OPAQUE_WHITE = 0xFFFFFFFFu;
+    /** Packed ARGB8888 value used by clear() for an opaque white pixel. */
+    const Uint32 OPAQUE_WHITE = 0xFFFFFFFFu;
 
-/**
- * @brief Builds a runtime-error message from the current SDL error string.
- * @param operation Description of the SDL operation that failed.
- * @return Combined human-readable error message.
- */
-std::string makeSDLError(const std::string& operation) {
-    const char* error = SDL_GetError();
-    return operation + ": " + ((error != nullptr) ? error : "unknown SDL error");
-}
+    /**
+     * @brief Builds a runtime-error message from the current SDL error string.
+     * @param operation Description of the SDL operation that failed.
+     * @return Combined human-readable error message.
+     */
+    std::string makeSDLError(const std::string& operation) {
+        const char* error = SDL_GetError();
+        return operation + ": " + ((error != nullptr) ? error : "unknown SDL error");
+    }
 
 }  // namespace
 
@@ -52,119 +52,119 @@ std::string makeSDLError(const std::string& operation) {
 
 SDL_Plotter::SDL_Plotter(int r, int c, bool WITH_SOUND)
     : texture(nullptr),
-      renderer(nullptr),
-      window(nullptr),
-      pixels(),
-      event(),
-      row(r),
-      col(c),
-      quit(false),
-      key_queue(),
-      click_queue(),
-      SOUND(false),
-      mixer(nullptr),
-      soundMap() {
+    renderer(nullptr),
+    window(nullptr),
+    pixels(),
+    event(),
+    row(r),
+    col(c),
+    quit(false),
+    key_queue(),
+    click_queue(),
+    SOUND(false),
+    mixer(nullptr),
+    soundMap() {
 
-    // A zero-sized or negative drawing area cannot produce a valid SDL texture.
-    if (row <= 0 || col <= 0) {
-        throw std::invalid_argument("SDL_Plotter dimensions must be positive");
-    }
+        // A zero-sized or negative drawing area cannot produce a valid SDL texture.
+        if (row <= 0 || col <= 0) {
+            throw std::invalid_argument("SDL_Plotter dimensions must be positive");
+        }
 
-    // Allocate the CPU-side pixel buffer before acquiring SDL resources.  This
-    // avoids leaking SDL objects if vector allocation throws an exception.
-    pixels.assign(static_cast<std::size_t>(row) *
-                      static_cast<std::size_t>(col),
-                  OPAQUE_WHITE);
+        // Allocate the CPU-side pixel buffer before acquiring SDL resources.  This
+        // avoids leaking SDL objects if vector allocation throws an exception.
+        pixels.assign(static_cast<std::size_t>(row) *
+                static_cast<std::size_t>(col),
+                OPAQUE_WHITE);
 
-    // SDL3 requires the video subsystem to be initialized before a window and
-    // renderer are created.
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
-        throw std::runtime_error(makeSDLError("SDL_Init(SDL_INIT_VIDEO) failed"));
-    }
+        // SDL3 requires the video subsystem to be initialized before a window and
+        // renderer are created.
+        if (!SDL_Init(SDL_INIT_VIDEO)) {
+            throw std::runtime_error(makeSDLError("SDL_Init(SDL_INIT_VIDEO) failed"));
+        }
 
-    // SDL3 removed the explicit window-position arguments used by SDL2.
-    window = SDL_CreateWindow("SDL3 Pixel Drawing", col, row, 0);
-    if (window == nullptr) {
-        SDL_QuitSubSystem(SDL_INIT_VIDEO);
-        throw std::runtime_error(makeSDLError("SDL_CreateWindow failed"));
-    }
+        // SDL3 removed the explicit window-position arguments used by SDL2.
+        window = SDL_CreateWindow("SDL3 Pixel Drawing", col, row, 0);
+        if (window == nullptr) {
+            SDL_QuitSubSystem(SDL_INIT_VIDEO);
+            throw std::runtime_error(makeSDLError("SDL_CreateWindow failed"));
+        }
 
-    // Passing nullptr asks SDL3 to select an appropriate rendering driver.
-    renderer = SDL_CreateRenderer(window, nullptr);
-    if (renderer == nullptr) {
-        SDL_DestroyWindow(window);
-        window = nullptr;
-        SDL_QuitSubSystem(SDL_INIT_VIDEO);
-        throw std::runtime_error(makeSDLError("SDL_CreateRenderer failed"));
-    }
+        // Passing nullptr asks SDL3 to select an appropriate rendering driver.
+        renderer = SDL_CreateRenderer(window, nullptr);
+        if (renderer == nullptr) {
+            SDL_DestroyWindow(window);
+            window = nullptr;
+            SDL_QuitSubSystem(SDL_INIT_VIDEO);
+            throw std::runtime_error(makeSDLError("SDL_CreateRenderer failed"));
+        }
 
-    // The public getColor() method historically exposes the packed ARGB8888
-    // pixel representation, so that format is retained in the SDL3 version.
-    texture = SDL_CreateTexture(renderer,
-                                SDL_PIXELFORMAT_ARGB8888,
-                                SDL_TEXTUREACCESS_STATIC,
-                                col,
-                                row);
-    if (texture == nullptr) {
-        SDL_DestroyRenderer(renderer);
-        SDL_DestroyWindow(window);
-        renderer = nullptr;
-        window = nullptr;
-        SDL_QuitSubSystem(SDL_INIT_VIDEO);
-        throw std::runtime_error(makeSDLError("SDL_CreateTexture failed"));
-    }
+        // The public getColor() method historically exposes the packed ARGB8888
+        // pixel representation, so that format is retained in the SDL3 version.
+        texture = SDL_CreateTexture(renderer,
+                SDL_PIXELFORMAT_ARGB8888,
+                SDL_TEXTUREACCESS_STATIC,
+                col,
+                row);
+        if (texture == nullptr) {
+            SDL_DestroyRenderer(renderer);
+            SDL_DestroyWindow(window);
+            renderer = nullptr;
+            window = nullptr;
+            SDL_QuitSubSystem(SDL_INIT_VIDEO);
+            throw std::runtime_error(makeSDLError("SDL_CreateTexture failed"));
+        }
 
-    // SDL3 defaults alpha-capable textures to alpha blending.  The historical
-    // SDL_Plotter pixel encoding does not set alpha for plotted RGB pixels, so
-    // disabling texture blending preserves the visible behavior of the SDL2
-    // implementation and preserves getColor()'s packed pixel values.
-    if (!SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE)) {
-        SDL_LogWarn(SDL_LOG_CATEGORY_RENDER,
+        // SDL3 defaults alpha-capable textures to alpha blending.  The historical
+        // SDL_Plotter pixel encoding does not set alpha for plotted RGB pixels, so
+        // disabling texture blending preserves the visible behavior of the SDL2
+        // implementation and preserves getColor()'s packed pixel values.
+        if (!SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_NONE)) {
+            SDL_LogWarn(SDL_LOG_CATEGORY_RENDER,
                     "SDL_Plotter: unable to disable texture blending: %s",
                     SDL_GetError());
-    }
+        }
 
-    // SDL3 does not emit SDL_EVENT_TEXT_INPUT events unless text input has been
-    // explicitly enabled for the window.
-    if (!SDL_StartTextInput(window)) {
-        SDL_LogWarn(SDL_LOG_CATEGORY_INPUT,
+        // SDL3 does not emit SDL_EVENT_TEXT_INPUT events unless text input has been
+        // explicitly enabled for the window.
+        if (!SDL_StartTextInput(window)) {
+            SDL_LogWarn(SDL_LOG_CATEGORY_INPUT,
                     "SDL_Plotter: unable to enable text input: %s",
                     SDL_GetError());
-    }
+        }
 
-    // Sound is optional.  Graphics remain usable if SDL3_mixer or the default
-    // playback device cannot be initialized.
-    if (WITH_SOUND) {
-        if (!MIX_Init()) {
-            SDL_LogWarn(SDL_LOG_CATEGORY_AUDIO,
+        // Sound is optional.  Graphics remain usable if SDL3_mixer or the default
+        // playback device cannot be initialized.
+        if (WITH_SOUND) {
+            if (!MIX_Init()) {
+                SDL_LogWarn(SDL_LOG_CATEGORY_AUDIO,
                         "SDL_Plotter: MIX_Init failed; sound disabled: %s",
                         SDL_GetError());
-        } else {
-            mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,
-                                           nullptr);
+            } else {
+                mixer = MIX_CreateMixerDevice(SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK,
+                        nullptr);
 
-            if (mixer == nullptr) {
-                SDL_LogWarn(SDL_LOG_CATEGORY_AUDIO,
+                if (mixer == nullptr) {
+                    SDL_LogWarn(SDL_LOG_CATEGORY_AUDIO,
                             "SDL_Plotter: unable to open audio device; "
                             "sound disabled: %s",
                             SDL_GetError());
-                MIX_Quit();
-            } else {
-                SOUND = true;
+                    MIX_Quit();
+                } else {
+                    SOUND = true;
+                }
             }
         }
-    }
 
-    // Display the initial white drawing surface.
-    update();
-}
+        // Display the initial white drawing surface.
+        update();
+    }
 
 SDL_Plotter::~SDL_Plotter() {
     // Release each caller-owned MIX_Audio reference.  SDL3_mixer internally
     // reference-counts audio data, so an active playback may safely finish.
     for (std::map<std::string, param>::iterator it = soundMap.begin();
-         it != soundMap.end();
-         ++it) {
+            it != soundMap.end();
+            ++it) {
         if (it->second.audio != nullptr) {
             MIX_DestroyAudio(it->second.audio);
             it->second.audio = nullptr;
@@ -218,12 +218,12 @@ void SDL_Plotter::update() {
     // Copy the CPU-side pixel array to the SDL texture.  Pitch is the number of
     // bytes occupied by one complete row in the source buffer.
     if (!SDL_UpdateTexture(texture,
-                           nullptr,
-                           pixels.data(),
-                           col * static_cast<int>(sizeof(Uint32)))) {
+                nullptr,
+                pixels.data(),
+                col * static_cast<int>(sizeof(Uint32)))) {
         SDL_LogError(SDL_LOG_CATEGORY_RENDER,
-                     "SDL_Plotter: SDL_UpdateTexture failed: %s",
-                     SDL_GetError());
+                "SDL_Plotter: SDL_UpdateTexture failed: %s",
+                SDL_GetError());
         return;
     }
 
@@ -231,22 +231,22 @@ void SDL_Plotter::update() {
     // it, and then present the finished frame.
     if (!SDL_RenderClear(renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_RENDER,
-                     "SDL_Plotter: SDL_RenderClear failed: %s",
-                     SDL_GetError());
+                "SDL_Plotter: SDL_RenderClear failed: %s",
+                SDL_GetError());
         return;
     }
 
     if (!SDL_RenderTexture(renderer, texture, nullptr, nullptr)) {
         SDL_LogError(SDL_LOG_CATEGORY_RENDER,
-                     "SDL_Plotter: SDL_RenderTexture failed: %s",
-                     SDL_GetError());
+                "SDL_Plotter: SDL_RenderTexture failed: %s",
+                SDL_GetError());
         return;
     }
 
     if (!SDL_RenderPresent(renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_RENDER,
-                     "SDL_Plotter: SDL_RenderPresent failed: %s",
-                     SDL_GetError());
+                "SDL_Plotter: SDL_RenderPresent failed: %s",
+                SDL_GetError());
     }
 }
 
@@ -254,8 +254,8 @@ Uint32 SDL_Plotter::getColor(int x, int y) {
     // Coordinates are a documented precondition for this accessor so that its
     // behavior remains consistent with the original implementation.
     return pixels[static_cast<std::size_t>(y) *
-                      static_cast<std::size_t>(col) +
-                  static_cast<std::size_t>(x)];
+        static_cast<std::size_t>(col) +
+        static_cast<std::size_t>(x)];
 }
 
 void SDL_Plotter::plotPixel(int x, int y, int r, int g, int b) {
@@ -263,11 +263,11 @@ void SDL_Plotter::plotPixel(int x, int y, int r, int g, int b) {
     // buffer.  RGB values are expected to already be in the range [0, 255].
     if (x >= 0 && y >= 0 && x < col && y < row) {
         pixels[static_cast<std::size_t>(y) *
-                   static_cast<std::size_t>(col) +
-               static_cast<std::size_t>(x)] =
+            static_cast<std::size_t>(col) +
+            static_cast<std::size_t>(x)] =
             static_cast<Uint32>(RED_SHIFT * r +
-                                GREEN_SHIFT * g +
-                                BLUE_SHIFT * b);
+                    GREEN_SHIFT * g +
+                    BLUE_SHIFT * b);
     }
 }
 
@@ -277,18 +277,18 @@ void SDL_Plotter::plotPixel(point p, int r, int g, int b) {
 
 void SDL_Plotter::plotPixel(int x, int y, color c) {
     plotPixel(x,
-              y,
-              static_cast<int>(c.R),
-              static_cast<int>(c.G),
-              static_cast<int>(c.B));
+            y,
+            static_cast<int>(c.R),
+            static_cast<int>(c.G),
+            static_cast<int>(c.B));
 }
 
 void SDL_Plotter::plotPixel(point p, color c) {
     plotPixel(p.x,
-              p.y,
-              static_cast<int>(c.R),
-              static_cast<int>(c.G),
-              static_cast<int>(c.B));
+            p.y,
+            static_cast<int>(c.R),
+            static_cast<int>(c.G),
+            static_cast<int>(c.B));
 }
 
 void SDL_Plotter::clear() {
@@ -349,7 +349,7 @@ bool SDL_Plotter::getQuit() {
             // SDL3 stores event coordinates as floats.  SDL_Plotter's public
             // point type is integer-based, so truncate to integer coordinates.
             click_queue.push(point(static_cast<int>(event.button.x),
-                                   static_cast<int>(event.button.y)));
+                        static_cast<int>(event.button.y)));
         }
 
         if (event.type == SDL_EVENT_QUIT) {
@@ -427,9 +427,9 @@ void SDL_Plotter::initSound(std::string sound) {
     if (soundData.audio == nullptr) {
         soundData.running = false;
         SDL_LogError(SDL_LOG_CATEGORY_AUDIO,
-                     "SDL_Plotter: unable to load sound '%s': %s",
-                     sound.c_str(),
-                     SDL_GetError());
+                "SDL_Plotter: unable to load sound '%s': %s",
+                sound.c_str(),
+                SDL_GetError());
         return;
     }
 
@@ -443,8 +443,8 @@ void SDL_Plotter::playSound(std::string sound) {
 
     std::map<std::string, param>::iterator it = soundMap.find(sound);
     if (it == soundMap.end() ||
-        !it->second.running ||
-        it->second.audio == nullptr) {
+            !it->second.running ||
+            it->second.audio == nullptr) {
         return;
     }
 
@@ -453,9 +453,9 @@ void SDL_Plotter::playSound(std::string sound) {
     // thread/condition-variable mechanism required by the older implementation.
     if (!MIX_PlayAudio(mixer, it->second.audio)) {
         SDL_LogError(SDL_LOG_CATEGORY_AUDIO,
-                     "SDL_Plotter: unable to play sound '%s': %s",
-                     sound.c_str(),
-                     SDL_GetError());
+                "SDL_Plotter: unable to play sound '%s': %s",
+                sound.c_str(),
+                SDL_GetError());
     }
 }
 
