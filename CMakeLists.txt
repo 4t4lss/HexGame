@@ -33,5 +33,4 @@ target_link_libraries(hexLauncher
     PRIVATE 
         SDL3::SDL3
         SDL3_mixer::SDL3_mixer
-        SDL3_ttf::SDL3_ttf
 )
