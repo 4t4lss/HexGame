@@ -22,6 +22,7 @@ Make sure you have the following in your system:
 - A C++ compiler supporting **C++11** (GCC, CLang, or MSVC)
 - **Git**
 - SDL4.0
+- Ninja
 
 ### Installation & Building
 
@@ -33,18 +34,33 @@ cd HexGame
 ```
 
 2, **Configure the project:**
-    Use CMake to generate the build files inside a dedicated 'build' directory.
+    Use CMakePresets to select the preset for your system.
+    Presets consist of:
+- windows
+- macos
+- linux
 ```bash
-cmake -B build -S .
+cmake --preset <your system> .
 ```
 3, **Build the project:**
-    Compile the source code using generated build files.
+    Compile the source code using preset.
 ```bash
-cmake --build build
+cmake --build --preset <your system>
 ```
 ### Running the Application
 
 Once the build finished successfully, you can run the executable:
+
+EX for windows:
+```bash
+git clone https://github.com/4t4lss/HexGame
+
+cd HexGame
+
+cmake --preset windows .
+
+cmake --build --preset windows
+```
 
 * **On Linux/macOS:**
     ```bash
