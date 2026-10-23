@@ -1,2 +1,3 @@
 # file to prevent files from being tracked
 build/
+.cache/
