@@ -19,6 +19,10 @@ class GameLogic {
         bool detectWin(Player p);
 
         void nextTurn();
+
+        Player getCurrentPlayer();
+
+        Board getBoard();
 };
 
 #endif
