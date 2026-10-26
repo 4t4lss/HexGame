@@ -9,7 +9,7 @@ struct Cell {
     int x;
     int y;
 
-    Cell(const int x, const int y):
+    Cell(const int x = -1, const int y = -1):
         x{x},
         y{y}
     {}
