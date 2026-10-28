@@ -1,3 +1,4 @@
 # file to prevent files from being tracked
 build/
 .cache/
+.DS_store
