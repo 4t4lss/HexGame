@@ -1,39 +1,37 @@
-#include "SDL_Plotter.h"
 #include "GameObjects.h"
 #include "GameLogic.h"
 #include "InputInterface.h"
 #include "OutputInterface.h"
 #include "TestInput.h"
 #include "TestOutput.h"
-#include "SDLInput.h"
-#include "SDLOutput.h"
 
 // -----------------------------------------------------------------------------
 // Program constants
 // -----------------------------------------------------------------------------
 
-/** Height of the demonstration window in pixels. */
-const int WINDOW_ROWS = 600;
-/** Width of the demonstration window in pixels. */
-const int WINDOW_COLS = 800;
-/** Delay between loop iterations
- * when detecting inputs, in milliseconds. */
-const int LOOP_DELAY = 10;
-
 int main(int argc, char* argv[]) {
-    const InputInterface& input = TestInput("testin.txt");
-    const OutputInterface& output = TestOutput("testout.txt");
+    InputInterface* input;
+    OutputInterface* output;
+    //WindowManager* wm;
+    if(argc > 1) {
+        input = new TestInput(argv[1]);
+        output = new TestOutput();
+    }
+    else {
+        return 1;
+    }
 
-    GameLogic game(input.getBoardSize());
+    GameLogic game(input->getBoardSize());
 
-    while(!game.detectWin(PLAYER1) && !game.detectWin(PLAYER2)) {
-        Cell move;
+    while(game.getWinner() == NONE) {
+        Move move;
         do {
-            move = input.getCell(game.getCurrentPlayer());
+            move = input->getMove();
         } while(!game.writeMove(move));
 
-        output.output(game.getBoard(), move);
-
-        game.nextTurn();
+        output->output(game, move);
     }
+
+    delete input;
+    delete output;
 }

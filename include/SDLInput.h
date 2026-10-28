@@ -1,16 +1,18 @@
 #ifndef SDL_INPUT
 #define SDL_INPUT
 
-#include "SDL_Plotter.h"
+#include "WindowManager.h"
 #include "GameObjects.h"
 #include "InputInterface.h"
 
 class SDLInput : public InputInterface {
     private:
-        SDL_Plotter g;
+        WindowManager wm;
     public:
-        SDLInput (SDL_Plotter& g);
+        SDLInput (WindowManager& wm);
+        ~SDLInput();
         Cell getMove(Player p);
+        size_t getBoardSize();
 };
 
 #endif

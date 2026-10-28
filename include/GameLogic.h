@@ -2,7 +2,7 @@
 #define GAME_LOGIC_H
 
 #include "GameObjects.h"
-#include <map>
+#include <vector>
 
 class GameLogic {
     private:
@@ -10,19 +10,31 @@ class GameLogic {
         Board board;
         Player currentPlayer;
         size_t turnNumber;
+        Player winner;
+        std::vector<Move> validMoveHistory;
+
+        bool detectWin(Player p);
         
     public:
         GameLogic(size_t boardSize);
 
-        bool writeMove(Cell c);
+        bool writeMove(Move& mov);
 
-        bool detectWin(Player p);
+        Player getCurrentPlayer() const;
 
-        void nextTurn();
+        Player getWinner() const;
 
-        Player getCurrentPlayer();
+        Board getBoard() const;
 
-        Board getBoard();
+        size_t getBoardSize() const;
+
+        size_t getTurnNumber() const;
+
+        int getCellOwner(int row, int col) const;
+
+        size_t getGameStatus() const;
+
+
 };
 
 #endif

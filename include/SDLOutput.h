@@ -1,16 +1,17 @@
 #ifndef SDL_OUTPUT
 #define SDL_OUTPUT
 
-#include "SDL_Plotter.h"
+#include "WindowManager.h"
 #include "GameObjects.h"
 #include "OutputInterface.h"
 
 class SDLOutput : public OutputInterface {
     private:
-        SDL_Plotter g;
+        WindowManager wm;
         void drawCell(Cell c, Player p);
     public:
-        SDLOutput (SDL_Plotter& g);
+        SDLOutput (WindowManager& wm);
+        ~SDLOutput();
         void output(Board board, Cell lastMove);
 };
 

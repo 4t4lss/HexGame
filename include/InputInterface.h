@@ -5,7 +5,9 @@
 
 class InputInterface {
     public:
-        virtual Cell getMove(Player p) = 0;
+        virtual ~InputInterface() = 0;
+        virtual size_t getBoardSize() = 0;
+        virtual Move getMove() = 0;
 };
 
 #endif

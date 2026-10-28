@@ -10,8 +10,10 @@ class TestInput : public InputInterface {
     private:
         std::ifstream inFile;
     public:
-        TestInput(std::string fileName);
-        Cell getMove(Player p);
+        TestInput(const char* filename);
+        ~TestInput();
+        size_t getBoardSize();
+        Move getMove();
 };
 
 #endif
