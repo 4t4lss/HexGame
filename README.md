@@ -69,7 +69,7 @@ cmake --build --preset windows
 
 * **On Windows:**
     ```cmd
-    .\build\Debug\hexLauncher.exe
+    .\build\hexLauncher.exe
     ```
 
 ---
