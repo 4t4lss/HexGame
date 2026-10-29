@@ -5,7 +5,7 @@ project(HexGame CXX)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # set cpp standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # locate sdl packages automatically
@@ -19,7 +19,15 @@ add_executable(hexLauncher)
 target_sources(hexLauncher 
     PRIVATE
         src/main.cpp
+        src/GameLogic.cpp
+        src/GameObjects.cpp
+        src/HashFunction.cpp
+        src/SDLInput.cpp
+        src/SDLOutput.cpp
         src/SDL_Plotter.cpp
+        src/TestInput.cpp
+        src/TestOutput.cpp
+        src/WindowManager.cpp
 )
 
 # includes the include folder for header files
