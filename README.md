@@ -90,19 +90,41 @@ Hex Game in Cpp using SDL_Plotter library.
 
 ## 📁 Repository Structure(Potentially all files included in submission)
 ```text
-HexGame
+.
 ├── build
-│   ├── CMakeCache.txt
+│   ├── build.ninja
 │   ├── CMakeFiles
+│   ├── compile_commands.json
 │   └── hexLauncher
 ├── CMakeLists.txt
+├── CMakePresets.json
 ├── CONTRIBUTING.md
 ├── include
-│   └── SDL_Plotter.h
+│   ├── GameLogic.h
+│   ├── GameObjects.h
+│   ├── HashFunction.h
+│   ├── InputInterface.h
+│   ├── OutputInterface.h
+│   ├── SDLInput.h
+│   ├── SDLOutput.h
+│   ├── SDL_Plotter.h
+│   ├── TestInput.h
+│   ├── TestOutput.h
+│   └── WindowManager.h
 ├── README.md
 └── src
+    ├── GameLogic.cpp
+    ├── GameObjects.cpp
+    ├── HashFunction.cpp
     ├── main.cpp
-    └── SDL_Plotter.cpp
+    ├── SDLInput.cpp
+    ├── SDLOutput.cpp
+    ├── SDL_Plotter.cpp
+    ├── SDL_Plotter_Demo.cpp
+    ├── TestInput.cpp
+    ├── TestOutput.cpp
+    └── WindowManager.cpp
+
 ```
 
 ---
