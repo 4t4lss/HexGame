@@ -4,9 +4,12 @@ bool GameLogic::detectWin(Player p) {
     return false;
 }
 
-GameLogic::GameLogic(size_t boardSize) {
-    
-}
+GameLogic::GameLogic(size_t boardSize):
+    boardSize{boardSize},
+    currentPlayer{PLAYER1},
+    turnNumber{0},
+    winner{NONE}
+{}
 
 bool GameLogic::writeMove(Move& mov) {
 
