@@ -22,6 +22,8 @@ class GameLogic {
 
         Player getCurrentPlayer() const;
 
+        Player getWinner() const;
+
         Board getBoard() const;
 
         size_t getBoardSize() const;
