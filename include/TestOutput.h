@@ -19,7 +19,7 @@ class TestOutput : public OutputInterface {
         *                with initialized output stream                     
         * 
         */
-        TestOutput(std::ostream out);
+        TestOutput(std::ostream& out);
 
         /*
         * description: destructor
@@ -40,7 +40,7 @@ class TestOutput : public OutputInterface {
         *                output stream                 
         * 
         */
-        void output(GameLogic gl, Move lastValidMove, std::ostream& out);
+        void output(GameLogic gl, Move lastValidMove);
 };
 
 #endif

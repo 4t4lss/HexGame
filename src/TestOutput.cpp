@@ -1,6 +1,6 @@
 #include "TestOutput.h"
 
-TestOutput::TestOutput(std::ostream outStream) : out(outStream) {
+TestOutput::TestOutput(std::ostream& outStream) : out(outStream) {
 }
 
 TestOutput::~TestOutput() {
