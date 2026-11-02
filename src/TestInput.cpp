@@ -1,4 +1,5 @@
 #include "TestInput.h"
+#include <iostream>
 
 TestInput::TestInput(const char* fileName) : inFile(fileName) {
 }
@@ -8,6 +9,7 @@ TestInput::~TestInput() {
 }
 
 Move TestInput::getMove() {
+    std::cout << "In getMove\n";
     Move move;
     int row, col;
     int player;
@@ -23,6 +25,7 @@ size_t TestInput::getBoardSize() {
     int size;
 
     inFile >> size;
+    // std::cout << "\n TestInput size: " << size;
 
     return size;
 }

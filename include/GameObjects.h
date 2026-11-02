@@ -1,7 +1,7 @@
 #ifndef GAME_OBJECTS_H
 #define GAME_OBJECTS_H
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 enum Player : char {NONE = 0b00, PLAYER1 = 0b01, PLAYER2 = 0b10};
@@ -14,6 +14,19 @@ struct Cell {
         row{row},
         col{col}
     {}
+
+    bool operator==(const Cell& other) const {
+        return row == other.row && col == other.col;
+    }
+};
+
+
+struct CellHasher {
+    size_t operator()(const Cell& p) const
+    {
+        // Combine hashes of x and y using the bitwise XOR
+        return p.row * 19 + p.col;
+    }
 };
 
 struct Move {
@@ -23,6 +36,6 @@ struct Move {
     std::string result;
 };
 
-typedef std::map<Cell,Player> Board;
+typedef std::unordered_map<Cell,Player, CellHasher> Board;
 
 #endif

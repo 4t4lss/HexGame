@@ -6,7 +6,7 @@
 
 class OutputInterface {
     public:
-        virtual ~OutputInterface() = 0;
+        virtual ~OutputInterface() = default;
         virtual void output(GameLogic gl, Move lastValidMove) = 0;
 };
 
