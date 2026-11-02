@@ -20,8 +20,6 @@ target_sources(hexLauncher
     PRIVATE
         src/main.cpp
         src/GameLogic.cpp
-        src/GameObjects.cpp
-        src/HashFunction.cpp
         # src/SDLInput.cpp
         # src/SDLOutput.cpp
         # src/SDL_Plotter.cpp

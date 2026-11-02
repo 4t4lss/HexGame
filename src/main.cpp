@@ -1,7 +1,5 @@
 #include "GameObjects.h"
 #include "GameLogic.h"
-#include "InputInterface.h"
-#include "OutputInterface.h"
 #include "TestInput.h"
 #include "TestOutput.h"
 
@@ -15,7 +13,7 @@ int main(int argc, char* argv[]) {
     //WindowManager* wm;
     if(argc > 1) {
         input = new TestInput(argv[1]);
-        output = new TestOutput();
+        output = new TestOutput(std::cout);
     }
     else {
         return 1;

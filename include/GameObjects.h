@@ -15,7 +15,7 @@ struct Cell {
         col{col}
     {}
 
-    bool operator==(const Cell& other) {
+    bool operator==(const Cell& other) const {
         return row == other.row && col == other.col;
     }
 };

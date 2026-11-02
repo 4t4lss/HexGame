@@ -5,7 +5,7 @@
 
 class InputInterface {
     public:
-        virtual ~InputInterface() = 0;
+        virtual ~InputInterface() = default;
         virtual size_t getBoardSize() = 0;
         virtual Move getMove() = 0;
 };
