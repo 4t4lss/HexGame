@@ -2,7 +2,8 @@
 #define GAME_LOGIC_H
 
 #include "GameObjects.h"
-#include <vector>
+#include <queue>
+#include <set>
 
 class GameLogic {
     private:
@@ -13,6 +14,7 @@ class GameLogic {
         Player winner;
         std::vector<Move> validMoveHistory;
 
+        void pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell> visited, const Player p);
         bool detectWin(Player p);
         
     public:
