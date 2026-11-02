@@ -16,6 +16,15 @@ struct Cell {
     {}
 };
 
+
+struct CellHasher {
+    size_t operator()(const Cell& p) const
+    {
+        // Combine hashes of x and y using the bitwise XOR
+        return p.row * 19 + p.col;
+    }
+};
+
 struct Move {
     Cell c;
     Player p;
@@ -23,6 +32,6 @@ struct Move {
     std::string result;
 };
 
-typedef std::unordered_map<Cell,Player> Board;
+typedef std::unordered_map<Cell,Player, CellHasher> Board;
 
 #endif
