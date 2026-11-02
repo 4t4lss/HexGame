@@ -1,7 +1,40 @@
 #include "GameLogic.h"
 
+void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell> visited, const Player p) {
+    int i = center.row, j = center.col;
+    Cell adj[] = {Cell(i+1, j+1), Cell(i+1, j), Cell(i, j+1), Cell(i, j-1), Cell(i-1, j), Cell(i-1, j-1)};
+
+    for(Cell c : adj) {
+        if(board.at(c) == p && visited.count(c) == 0) {
+            list.push(c);
+        }
+    }
+    visited.insert(center);
+}
+
 bool GameLogic::detectWin(Player p) {
-    return false;
+    std::set<Cell> visitedCells;
+    std::queue<Cell> neighborsToCheck;
+    for(size_t i = 0; i < boardSize; i++) {
+        Cell cur;
+        if(p == PLAYER1) {
+            cur = Cell(0,i);
+        }
+        else {
+            cur = Cell(i,0);
+        }
+        if(board.at(cur)==p) {
+            pushNeighbors(cur, neighborsToCheck, visitedCells, p);
+        }
+    }
+    bool win = false;
+    while(!win && !neighborsToCheck.empty()) {
+        pushNeighbors(neighborsToCheck.front(), neighborsToCheck, visitedCells, p);
+        neighborsToCheck.pop();
+        if(p == PLAYER1 && neighborsToCheck.front().col == boardSize-1) win = true;
+        else if(neighborsToCheck.front().row == boardSize-1) win = true;
+    }
+    return win;
 }
 
 GameLogic::GameLogic(size_t boardSize):
