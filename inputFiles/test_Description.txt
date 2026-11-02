@@ -20,8 +20,5 @@ Uses a 9x9 board. Win occurs on ln37.
     - legal claim
     - out of range cell
 
-To be implemented in other tests:
----------------------------------------
-- Invalid players (0 or 3)
-- Edge sizes (5 & 19)
-- Invalid sizes (4, 20)
+test_minSize: Tests with a 5x5 board.
+test_maxSize: Tests with a 19x19 board.
