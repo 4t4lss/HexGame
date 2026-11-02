@@ -1,0 +1,26 @@
+Test0:
+Perfomes a basic game on a 7x7 board. This test does not test edge cases. It only tests normal gameplay with no mistakes, including claiming hexes, switching players, and winning.
+
+test1: 
+Tests some edge cases. Uses an 11x11 board.
+- (ln3) Claiming a hex out of range of the board
+- (ln6) Player attempting to claim on their opponents turn
+- Ending with no win
+    - Ends before anyone has won
+    - Tests a line of hexes with one empty
+    - Tests a line of hexes with one enemy hex
+
+
+
+To be implemented in other tests:
+---------------------------------------
+- Attempting to claim an already claimed hex.
+- Attempting to claim a hex when it is not your turn.
+- Win detection:
+    - A path with a gap of one empty cell.
+    - A path broken by one opponent cell.
+- Moves in the file after a win has occured
+
+- Invalid players (0 or 3)
+- Edge sizes (5 & 19)
+- Invalid sizes (4, 20)
