@@ -14,6 +14,10 @@ struct Cell {
         row{row},
         col{col}
     {}
+
+    bool operator==(const Cell& other) {
+        return row == other.row && col == other.col;
+    }
 };
 
 
