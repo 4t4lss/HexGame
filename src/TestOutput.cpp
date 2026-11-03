@@ -7,11 +7,14 @@ TestOutput::~TestOutput() {
 }
 
 void TestOutput::output(GameLogic gl, Move lastValidMove) {
-    std::cout << "Shawn";
-    out << "MOVE" << gl.getTurnNumber() << ": " << lastValidMove.valid
-        << "TURN: " << lastValidMove.p
-        << "WINNER: " << gl.getWinner()
-        << "HASH: " << hashGameState(gl)
+    out << "MOVE " << gl.getTurnNumber() << ": " << (lastValidMove.valid? "ACCEPTED" : "REJECTED") << std::endl
+        << "TURN: " << 0+lastValidMove.p << std::endl;
+    if(gl.getWinner() == NONE) {
+        out << "WINNER: none" <<std::endl;
+    }
+    else {
+        out << "WINNER: " << static_cast<int>(gl.getWinner()) << std::endl;
+    }
+    out << "HASH: " << hashGameState(gl) << std::endl
         << std::endl;
-    std::cout << "Sam";
 }

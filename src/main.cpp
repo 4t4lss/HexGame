@@ -9,8 +9,8 @@
 // -----------------------------------------------------------------------------
 
 int main(int argc, char* argv[]) {
-    InputInterface* input;
-    OutputInterface* output;
+    TestInput* input;
+    TestOutput* output;
     //WindowManager* wm;
     assert(argc > 1);
     input = new TestInput(argv[1]);
@@ -19,6 +19,8 @@ int main(int argc, char* argv[]) {
     GameLogic game(input->getBoardSize());
 
     while(game.getWinner() == NONE) {
+        game.nextTurn();
+
         Move move;
         do {
             move = input->getMove();

@@ -36,8 +36,8 @@ std::string hashGameState(const Game& game)
     // Convert to eight-digit uppercase hexadecimal
     std::ostringstream output;
     output << std::uppercase
-           << std::hex
-           << std::setw(8)
+           //<< std::hex
+           //<< std::setw(8)
            << std::setfill('0')
            << hash;
 

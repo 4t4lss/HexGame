@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <string>
 
-enum Player : char {NONE = 0b00, PLAYER1 = 0b01, PLAYER2 = 0b10};
+enum Player : char {NONE = 0, PLAYER1 = 1, PLAYER2 = 2};
 
 struct Cell {
     int row;

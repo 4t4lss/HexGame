@@ -4,6 +4,7 @@
 #include "GameObjects.h"
 #include "InputInterface.h"
 #include <fstream>
+#include <cassert>
 
 class TestInput : public InputInterface {
     private:

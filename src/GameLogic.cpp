@@ -1,11 +1,11 @@
 #include "GameLogic.h"
 
-void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell> visited, const Player p) {
+void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell>& visited, const Player p) {
     int i = center.row, j = center.col;
     Cell adj[] = {Cell(i+1, j+1), Cell(i+1, j), Cell(i, j+1), Cell(i, j-1), Cell(i-1, j), Cell(i-1, j-1)};
 
     for(Cell c : adj) {
-        if(board.at(c) == p && visited.count(c) == 0) {
+        if(board.find(c) != board.end() && board.at(c) == p && visited.count(c) == 0) {
             list.push(c);
         }
     }
@@ -23,26 +23,31 @@ bool GameLogic::detectWin(Player p) {
         else {
             cur = Cell(i,0);
         }
-        if(board.at(cur)==p) {
+        if(board.find(cur) != board.end() && board.at(cur)==p) {
             pushNeighbors(cur, neighborsToCheck, visitedCells, p);
         }
     }
     bool win = false;
+    //outNeighbors(neighborsToCheck,visitedCells);
     while(!win && !neighborsToCheck.empty()) {
         pushNeighbors(neighborsToCheck.front(), neighborsToCheck, visitedCells, p);
         neighborsToCheck.pop();
-        if(p == PLAYER1 && neighborsToCheck.front().col == boardSize-1) win = true;
-        else if(neighborsToCheck.front().row == boardSize-1) win = true;
+        //outNeighbors(neighborsToCheck,visitedCells);
+        if(!neighborsToCheck.empty()) {
+            if(p == PLAYER1 && neighborsToCheck.front().row == boardSize-1) win = true;
+            else if(neighborsToCheck.front().col == boardSize-1) win = true;
+        }
     }
     return win;
 }
 
 GameLogic::GameLogic(size_t boardSize):
     boardSize{boardSize},
-    currentPlayer{PLAYER1},
-    turnNumber{1},
-    winner{NONE}
-{}
+    currentPlayer{NONE},
+    turnNumber{0}
+{
+    winner = NONE;
+}
 
 bool GameLogic::writeMove(Move& mov) {
     if(mov.c.row < 0 || mov.c.row >= boardSize ||
@@ -50,7 +55,11 @@ bool GameLogic::writeMove(Move& mov) {
         mov.valid = false;
         mov.result = "Out of Bounds";
     }
-    else if (board.find(mov.c) == board.end() && getTurnNumber() != 1){
+    else if(mov.p != PLAYER1 && mov.p != PLAYER2) {
+        mov.valid = false;
+        mov.result = "Invalid Player";
+    }
+    else if (board.find(mov.c) != board.end() && getTurnNumber() != 1){
         mov.valid = false;
         mov.result = "Cell already taken";
     }
@@ -58,7 +67,11 @@ bool GameLogic::writeMove(Move& mov) {
         mov.valid = true;
         mov.result = "ACCEPTED";
 
-        board.emplace(mov.c, getCurrentPlayer());
+        board.emplace(mov.c, mov.p);
+
+        if(detectWin(mov.p)) {
+            winner = mov.p;
+        }
     }
 
 
@@ -66,8 +79,13 @@ bool GameLogic::writeMove(Move& mov) {
 
 }
 
+void GameLogic::nextTurn() {
+    turnNumber++;
+    currentPlayer = currentPlayer==PLAYER2?PLAYER1:PLAYER2;
+}
+
 Player GameLogic::getWinner() const {
-    return currentPlayer;
+    return winner;
 }
 
 Player GameLogic::getCurrentPlayer() const {
@@ -88,7 +106,9 @@ size_t GameLogic::getTurnNumber() const {
 
 int GameLogic::getCellOwner(int row, int col) const {
     Cell c(row,col);
-    return board.at(c);
+    int owner = NONE+0;
+    if(board.find(c)  != board.end()) owner = board.at(c)+0;
+    return owner;
 }
 
 size_t GameLogic::getGameStatus() const {

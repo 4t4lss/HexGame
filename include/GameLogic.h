@@ -14,13 +14,15 @@ class GameLogic {
         Player winner;
         std::vector<Move> validMoveHistory;
 
-        void pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell> visited, const Player p);
+        void pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell>& visited, const Player p);
         bool detectWin(Player p);
         
     public:
         GameLogic(size_t boardSize);
 
         bool writeMove(Move& mov);
+
+        void nextTurn();
 
         Player getCurrentPlayer() const;
 
