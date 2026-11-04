@@ -83,13 +83,11 @@ bool GameLogic::validateMove(Move& mov) {
 }
 
 void GameLogic::writeMove(const Move& mov) {
-    if(mov.valid) {
-        board.emplace(mov.c, mov.p);
+    board.emplace(mov.c, mov.p);
 
-        if(detectWin(mov.p)) {
-            winner = mov.p;
-            currentPlayer=NONE;
-        }
+    if(detectWin(mov.p)) {
+        winner = mov.p;
+        currentPlayer=NONE;
     }
 }
 
