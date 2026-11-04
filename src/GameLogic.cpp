@@ -49,13 +49,13 @@ GameLogic::GameLogic(size_t boardSize):
     winner = NONE;
 }
 
-bool GameLogic::writeMove(Move& mov) {
+bool GameLogic::validateMove(Move& mov) {
     if(mov.c.row < 0 || mov.c.row >= boardSize ||
             mov.c.col < 0 || mov.c.col >= boardSize) {
         mov.valid = false;
         mov.result = "Out of Bounds";
     }
-    else if(mov.p != PLAYER1 && mov.p != PLAYER2) {
+    else if(mov.p != currentPlayer) {
         mov.valid = false;
         mov.result = "Invalid Player";
     }
@@ -63,20 +63,28 @@ bool GameLogic::writeMove(Move& mov) {
         mov.valid = false;
         mov.result = "Cell already taken";
     }
+    else if (winner != NONE){
+        mov.valid = false;
+        mov.result = "Game already won";
+    }
     else {
         mov.valid = true;
         mov.result = "ACCEPTED";
+    }
 
+
+    return mov.valid;
+
+}
+
+void GameLogic::writeMove(const Move& mov) {
+    if(mov.valid) {
         board.emplace(mov.c, mov.p);
 
         if(detectWin(mov.p)) {
             winner = mov.p;
         }
     }
-
-
-    return mov.valid;
-
 }
 
 void GameLogic::nextTurn() {

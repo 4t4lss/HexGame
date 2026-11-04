@@ -20,7 +20,9 @@ class GameLogic {
     public:
         GameLogic(size_t boardSize);
 
-        bool writeMove(Move& mov);
+        bool validateMove(Move& mov);
+
+        void writeMove(const Move& mov);
 
         void nextTurn();
 
