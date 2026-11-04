@@ -30,6 +30,7 @@ size_t TestInput::getBoardSize() {
 }
 
 bool TestInput::isRunning() {
-    return !(std::cin.eof());
+    std::cin.ignore();
+    return std::cin.peek() != EOF;
 }
 
