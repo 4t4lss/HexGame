@@ -16,11 +16,7 @@ void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::s
 
 bool GameLogic::detectWin(const Player p) {
     bool win = false;
-<<<<<<< HEAD
-    if(turnNumber/2 >= boardSize) {
-=======
     if(turnNumber/2 >= boardSize - 2) {
->>>>>>> 6b2625d (Add turn and bounds checking in win detection)
         std::set<Cell> visitedCells;
         std::queue<Cell> cellsToCheck;
         for(size_t i = 0; i < boardSize; i++) {
