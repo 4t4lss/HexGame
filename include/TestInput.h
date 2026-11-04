@@ -45,5 +45,7 @@ class TestInput : public InputInterface {
         * 
         */
         size_t getBoardSize();
+
+        bool isRunning();
 };
 #endif

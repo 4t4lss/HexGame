@@ -13,13 +13,14 @@ int main(int argc, char* argv[]) {
     TestOutput* output;
     //WindowManager* wm;
     assert(argc > 1);
-    input = new TestInput(argv[1]);
+    input = new TestInput();
     output = new TestOutput(std::cout);
 
     GameLogic game(input->getBoardSize());
 
     Move move;
-    while(true) {
+    while(input->isRunning()) {
+        std::cout << "Test" << std::endl;
 
         move = input->getMove();
         

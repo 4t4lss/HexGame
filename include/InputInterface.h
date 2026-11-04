@@ -8,6 +8,7 @@ class InputInterface {
         virtual ~InputInterface() = default;
         virtual size_t getBoardSize() = 0;
         virtual Move getMove() = 0;
+        virtual bool isRunning() = 0;
 };
 
 #endif

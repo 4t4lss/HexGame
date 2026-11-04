@@ -28,7 +28,7 @@ struct Cell {
 struct CellHasher {
     size_t operator()(const Cell& p) const
     {
-        // Combine hashes of x and y using the bitwise XOR
+        // Multiply row by the max board size and add the column
         return p.row * 19 + p.col;
     }
 };

@@ -13,6 +13,7 @@ class SDLInput : public InputInterface {
         ~SDLInput();
         Cell getMove(Player p);
         size_t getBoardSize();
+        bool isRunning();
 };
 
 #endif
