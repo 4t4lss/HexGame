@@ -10,6 +10,7 @@
 class TestOutput : public OutputInterface {
     private:
         std::ostream& out;
+        size_t moveCount;
     public:
         /*
         * description: paramtrized constructor
