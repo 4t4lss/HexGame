@@ -1,11 +1,9 @@
 #include "TestInput.h"
 
-TestInput::TestInput(const char* fileName) : inFile(fileName) {
-    assert(inFile);
+TestInput::TestInput() {
 }
 
 TestInput::~TestInput() {
-    inFile.close();
 }
 
 Move TestInput::getMove() {
@@ -14,13 +12,11 @@ Move TestInput::getMove() {
     int player;
 
 
-    inFile >> player >> row >> col;
+    std::cin >> player >> row >> col;
     move.c = Cell(row,col);
     move.p = static_cast<Player>(player);
 
     //std::cout << "Player: " << player+0 << " at " << row << " " << col << std::endl;
-    
-    assert(!inFile.eof());
 
     return move;
 }
@@ -28,7 +24,7 @@ Move TestInput::getMove() {
 size_t TestInput::getBoardSize() {
     int size;
 
-    inFile >> size;
+    std::cin >> size;
 
     return size;
 }

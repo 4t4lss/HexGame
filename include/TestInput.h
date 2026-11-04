@@ -3,12 +3,11 @@
 
 #include "GameObjects.h"
 #include "InputInterface.h"
-#include <fstream>
+#include <iostream>
 #include <cassert>
 
 class TestInput : public InputInterface {
     private:
-        std::ifstream inFile;
     public:
         /*
         * description: default constructor
@@ -18,7 +17,7 @@ class TestInput : public InputInterface {
         *                is opened              
         * 
         */
-        TestInput(const char* filename);
+        TestInput();
 
         /*
         * description:  destructor
