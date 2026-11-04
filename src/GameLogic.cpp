@@ -1,4 +1,5 @@
 #include "GameLogic.h"
+#include <sstream>
 
 void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell>& visited, const Player p) {
     int i = center.row, j = center.col;
@@ -43,8 +44,8 @@ bool GameLogic::detectWin(Player p) {
 
 GameLogic::GameLogic(size_t boardSize):
     boardSize{boardSize},
-    currentPlayer{NONE},
-    turnNumber{0}
+    currentPlayer{PLAYER1},
+    turnNumber{1}
 {
     winner = NONE;
 }
@@ -55,17 +56,19 @@ bool GameLogic::validateMove(Move& mov) {
         mov.valid = false;
         mov.result = "Out of Bounds";
     }
+    else if (winner != NONE){
+        mov.valid = false;
+        mov.result = "Game already won";
+    }
     else if(mov.p != currentPlayer) {
         mov.valid = false;
-        mov.result = "Invalid Player";
+        std::ostringstream oss;
+        oss << "Invalid Player: " << (0+mov.p) << " when should be " << (0 + currentPlayer);
+        mov.result = oss.str();
     }
     else if (board.find(mov.c) != board.end() && getTurnNumber() != 1){
         mov.valid = false;
         mov.result = "Cell already taken";
-    }
-    else if (winner != NONE){
-        mov.valid = false;
-        mov.result = "Game already won";
     }
     else {
         mov.valid = true;
@@ -83,13 +86,16 @@ void GameLogic::writeMove(const Move& mov) {
 
         if(detectWin(mov.p)) {
             winner = mov.p;
+            currentPlayer=NONE;
         }
     }
 }
 
 void GameLogic::nextTurn() {
     turnNumber++;
-    currentPlayer = currentPlayer==PLAYER2?PLAYER1:PLAYER2;
+    if(currentPlayer!=NONE) {
+        currentPlayer = currentPlayer==PLAYER2?PLAYER1:PLAYER2;
+    }
 }
 
 Player GameLogic::getWinner() const {
