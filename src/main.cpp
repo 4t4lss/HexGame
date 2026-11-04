@@ -20,8 +20,6 @@ int main(int argc, char* argv[]) {
 
     Move move;
     while(input->isRunning()) {
-        std::cout << "Test" << std::endl;
-
         move = input->getMove();
         
         if(game.validateMove(move)) {
