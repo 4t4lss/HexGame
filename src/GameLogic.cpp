@@ -6,37 +6,39 @@ void GameLogic::pushNeighbors(const Cell& center, std::queue<Cell>& list, std::s
     Cell adj[] = {Cell(i+1, j+1), Cell(i+1, j), Cell(i, j+1), Cell(i, j-1), Cell(i-1, j), Cell(i-1, j-1)};
 
     for(Cell c : adj) {
-        if(board.find(c) != board.end() && board.at(c) == p && visited.count(c) == 0) {
+        if(board.find(c) != board.end() && board.at(c) == p && visited.count(c) == 0
+                && c.row > 0 && c.row < boardSize && c.col > 0 && c.col < boardSize) {
             list.push(c);
+            visitedCells.insert(c);
         }
     }
-    visited.insert(center);
 }
 
-bool GameLogic::detectWin(Player p) {
-    std::set<Cell> visitedCells;
-    std::queue<Cell> neighborsToCheck;
-    for(size_t i = 0; i < boardSize; i++) {
-        Cell cur;
-        if(p == PLAYER1) {
-            cur = Cell(0,i);
-        }
-        else {
-            cur = Cell(i,0);
-        }
-        if(board.find(cur) != board.end() && board.at(cur)==p) {
-            pushNeighbors(cur, neighborsToCheck, visitedCells, p);
-        }
-    }
+bool GameLogic::detectWin(const Player p) {
     bool win = false;
-    //outNeighbors(neighborsToCheck,visitedCells);
-    while(!win && !neighborsToCheck.empty()) {
-        pushNeighbors(neighborsToCheck.front(), neighborsToCheck, visitedCells, p);
-        neighborsToCheck.pop();
-        //outNeighbors(neighborsToCheck,visitedCells);
-        if(!neighborsToCheck.empty()) {
-            if(p == PLAYER1 && neighborsToCheck.front().row == boardSize-1) win = true;
-            else if(neighborsToCheck.front().col == boardSize-1) win = true;
+    if(turnNumber/2 >= boardSize) {
+        std::set<Cell> visitedCells;
+        std::queue<Cell> cellsToCheck;
+        for(size_t i = 0; i < boardSize; i++) {
+            Cell cur;
+            if(p == PLAYER1) {
+                cur = Cell(0,i);
+            }
+            else {
+                cur = Cell(i,0);
+            }
+            if(board.find(cur) != board.end() && board.at(cur)==p) {
+                pushNeighbors(cur, cellsToCheck, visitedCells, p);
+                visitedCells.insert(cur);
+            }
+        }
+        while(!win && !cellsToCheck.empty()) {
+            pushNeighbors(cellsToCheck.front(), cellsToCheck, visitedCells, p);
+            cellsToCheck.pop();
+            if(!cellsToCheck.empty()) {
+                if(p == PLAYER1 && cellsToCheck.front().row == boardSize-1) win = true;
+                else if(cellsToCheck.front().col == boardSize-1) win = true;
+            }
         }
     }
     return win;
