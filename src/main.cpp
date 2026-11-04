@@ -17,16 +17,17 @@ int main(int argc, char* argv[]) {
     output = new TestOutput(std::cout);
 
     GameLogic game(input->getBoardSize());
+    game.nextTurn();
 
+    Move move;
     while(game.getWinner() == NONE) {
+
+        move = input->getMove();
+        game.validateMove(move);
+        game.writeMove(move);
+        output->output(game, move);
         game.nextTurn();
 
-        Move move;
-        do {
-            move = input->getMove();
-        } while(!game.writeMove(move));
-
-        output->output(game, move);
     }
 
     delete input;
