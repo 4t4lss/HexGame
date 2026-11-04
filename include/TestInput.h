@@ -13,8 +13,7 @@ class TestInput : public InputInterface {
         * description: default constructor
         * return: none
         * precondition: none
-        * postcondition: filestream object for input
-        *                is opened              
+        * postcondition: none           
         * 
         */
         TestInput();
@@ -23,7 +22,7 @@ class TestInput : public InputInterface {
         * description:  destructor
         * return: none
         * precondition: none
-        * postcondition: filestream object is closed        
+        * postcondition: object is destructed        
         * 
         */
         ~TestInput();
@@ -32,7 +31,7 @@ class TestInput : public InputInterface {
         * description: reads move from test input
         *              into cell object
         * return: Cell
-        * precondition: input file must be opened
+        * precondition: cin must contain input
         * postcondition: input data is read into Cell object                
         * 
         */
@@ -41,7 +40,7 @@ class TestInput : public InputInterface {
         /*
         * description: reads the board size from test input
         * return: int
-        * precondition: input file must be opened
+        * precondition: cin must contain input
         * postcondition: board size is read from input file              
         * 
         */
