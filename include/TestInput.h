@@ -1,3 +1,14 @@
+/*
+* Author: Shawn Douglas
+* Assignment Title: Hex Game
+* Assignment Description: Defines TestInput class
+* using cin, and tracks running state for post game
+* moves
+* Due Date: 11/13/2026
+* Date Created: 10/23/2026
+* Date Last Modified: 11/6/2026
+*/
+
 #ifndef TEST_INPUT
 #define TEST_INPUT
 

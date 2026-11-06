@@ -1,3 +1,13 @@
+/*
+* Author: Shawn Douglas
+* Assignment Title: Hex Game
+* Assignment Description: Defines TestOuput
+* class using output stream
+* Due Date: 11/13/2026
+* Date Created: 10/23/2026
+* Date Last Modified: 11/6/2026
+*/
+
 #ifndef TEST_OUTPUT
 #define TEST_OUTPUT
 
