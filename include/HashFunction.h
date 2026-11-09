@@ -3,6 +3,13 @@
 #include <sstream>
 #include <string>
 
+/*
+ * description: Hashes the Game State
+ * return: string: the hash in hexadecimal
+ * precondition: game is valid and contains
+ *  getBoardSize(), getCurrentPlayer(), and getGameStatus() functions
+ * postcondition: none
+ */
 template <typename Game>
 std::string hashGameState(const Game& game)
 {
