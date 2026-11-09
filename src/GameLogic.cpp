@@ -65,7 +65,7 @@ bool GameLogic::validateMove(Move& mov) {
     else if(mov.p != currentPlayer) {
         mov.valid = false;
         std::ostringstream oss;
-        oss << "Invalid Player: " << (0+mov.p) << " when should be " << (0 + currentPlayer);
+        oss << "Invalid Player: " << static_cast<int>(mov.p) << " when should be " <static_cast<int>(currentPlayer);
         mov.result = oss.str();
     }
     else if (board.find(mov.c) != board.end() && getTurnNumber() != 1){
@@ -77,6 +77,7 @@ bool GameLogic::validateMove(Move& mov) {
         mov.result = "ACCEPTED";
     }
 
+    validMoveHistory.push_back(mov);
 
     return mov.valid;
 
@@ -120,9 +121,9 @@ size_t GameLogic::getTurnNumber() const {
 
 int GameLogic::getCellOwner(int row, int col) const {
     Cell c(row,col);
-    int owner = NONE+0;
-    if(board.find(c)  != board.end()) owner = board.at(c)+0;
-    return owner;
+    Player owner = NONE;
+    if(board.find(c) != board.end()) owner = board.at(c);
+    return static_cast<int>(owner);
 }
 
 size_t GameLogic::getGameStatus() const {
