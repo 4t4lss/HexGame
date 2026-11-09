@@ -28,8 +28,8 @@ bool GameLogic::detectWin(const Player p) {
                 cur = Cell(i,0);
             }
             if(board.find(cur) != board.end() && board.at(cur)==p) {
-                pushNeighbors(cur, cellsToCheck, visitedCells, p);
                 visitedCells.insert(cur);
+                cellsToCheck.push(cur);
             }
         }
         while(!win && !cellsToCheck.empty()) {
