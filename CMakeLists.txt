@@ -39,3 +39,23 @@ target_link_libraries(hexLauncher
         SDL3::SDL3
         SDL3_mixer::SDL3_mixer
 )
+
+
+# cmake for test program
+add_executable(testRandom)
+
+target_sources(testRandom
+    PRIVATE
+        src/testRandom.cpp
+        src/GameLogic.cpp
+        # src/SDLInput.cpp
+        # src/SDLOutput.cpp
+        # src/SDL_Plotter.cpp
+        src/TestInput.cpp
+        src/TestOutput.cpp
+        # src/WindowManager.cpp
+)
+
+target_include_directories(testRandom PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
