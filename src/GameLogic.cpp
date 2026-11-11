@@ -92,7 +92,7 @@ bool GameLogic::validateMove(Move& mov) {
         mov.valid = false;
         std::ostringstream oss;
         oss << "Invalid Player: " << static_cast<int>(mov.p)
-            << " when should be " <static_cast<int>(currentPlayer);
+            << " when should be " << static_cast<int>(currentPlayer);
         mov.result = oss.str();
     }
     //If the cell is already occupied, unless it's the first move (Swap Rule)
