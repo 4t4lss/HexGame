@@ -15,21 +15,20 @@ class GameLogic {
         std::vector<Move> validMoveHistory;
 
         /*
-         * description: addres all the adjacent cells of a player p if:
-         *  - in range of board dimensions
-         *  - the cell is claimbed by player p
+         * description: Enqueues all unvisited neighbors of the center cell
+         *  that are owned by Player p
          * return: void
          * precondition: valid parameters are passed in
          * postcondition: none
         */
-        void pushNeighbors(const Cell& center, std::queue<Cell>& list, std::set<Cell>& visited, const Player p);
+        void pushAdjacent(const Cell& center, std::queue<Cell>& list, std::set<Cell>& visited, const Player p);
         /*
          * description: detects whether player p has reached both ends of the 
          *  hex grid.
          * return: boolean
          * precondition: a valid GameLogic object has been instantiated, 
          *  a valid player has been passed.
-         * postcondition: returns bool if game has been won by player p.
+         * postcondition: returns true if game has been won by player p.
         */
         bool detectWin(const Player p);
        
@@ -37,7 +36,7 @@ class GameLogic {
         /*
          * description: constructs a GameLogic object calling GameObject Board 
          * return: void
-         * precondition: boardSize is a valid size.
+         * precondition: none
          * postcondition: none.
         */
         GameLogic(size_t boardSize);
@@ -46,15 +45,16 @@ class GameLogic {
          * description: Returns whether a given Move is valid or not.
          * return: boolean
          * precondition: a valid GameLogic object exists.
-         * postcondition: returns if move valid.
+         * postcondition: returns true if move valid.
         */
         bool validateMove(Move& mov);
 
         /*
-         * description: inserts Move into hashmap Board
+         * description: inserts Move into hashmap Board and runs win detection
          * return: void
          * precondition: The move passed has to be a valid move.
-         * postcondition: Board now conatains Move
+         * postcondition: Board now conatains Move, and the Game State is
+         *  updated if the game is won
         */
         void writeMove(const Move& mov);
 
@@ -71,7 +71,7 @@ class GameLogic {
          * description: returns the player whose current turn it is
          * return: Player
          * precondition: a GameLogic object has been instantiated
-         * postcondition: the GameLogic's fields are not changed.
+         * postcondition: none
         */
         Player getCurrentPlayer() const;
 
@@ -85,7 +85,7 @@ class GameLogic {
 
         /*
          * description: returns the Board object in its current state.
-         * return: Board (unordered_map)
+         * return: Board (unordered_map<Cell,Player>)
          * precondition: A valid board object exists.
          * postcondition: none
         */
@@ -110,8 +110,7 @@ class GameLogic {
 
         /*
          * description: returns the player associated at a row and cell
-         *  by passing row and cell as a key in the hashmap "Board". 
-         * return: int
+         * return: int: 1 for player 1, 2 for player 2, 0 for none
          * precondition: a row and column must be passed and a GameLogic
          *  object must be instantiated.
          * postcondition: none
