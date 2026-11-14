@@ -27,18 +27,10 @@ Make sure you have the following in your system:
 ### Installation & Building
 
 1, **Clone the repository:**
-```bash
-git clone https://github.com/4t4lss/HexGame
-
-cd HexGame
-```
 
 2, **Configure the project:**
-    Use CMakePresets to select the preset for your system.
-    Presets consist of:
-- windows
-- macos
-- linux
+
+3, **Run executable**
 ```bash
 cmake --preset <your system> .
 ```
@@ -47,9 +39,7 @@ cmake --preset <your system> .
 ```bash
 cmake --build --preset <your system>
 ```
-### Running the Application
-
-Once the build finished successfully, you can run the executable:
+### Examples for different machines:
 
 EX for windows:
 ```bash
@@ -92,10 +82,6 @@ build/hexLauncher
 
 ---
 
-# Instruction for running graphical exam && Instructions for running the test mode
-
-
----
 
 ## 🎨 Overview(need to work on this ngl)
 Hex Game in Cpp using SDL_Plotter library.
