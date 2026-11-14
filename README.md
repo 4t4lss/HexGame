@@ -60,17 +60,35 @@ cd HexGame
 cmake --preset windows .
 
 cmake --build --preset windows
+
+.build\hexLauncher
 ```
 
-* **On Linux/macOS:**
-    ```bash
-    ./build/hexLaunhcer
-    ```
+EX for macos:
+```zsh
+git clone https://github.com/4t4lss/HexGame
 
-* **On Windows:**
-    ```cmd
-    .\build\hexLauncher.exe
-    ```
+cd HexGame
+
+cmake --preset macos .
+
+cmake --build --preset macos
+
+build/hexLauncher
+```
+
+EX for linux:
+```zsh
+git clone https://github.com/4t4lss/HexGame
+
+cd HexGame
+
+cmake --preset linux .
+
+cmake --build --preset linux
+
+build/hexLauncher
+```
 
 ---
 
