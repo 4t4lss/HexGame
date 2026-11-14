@@ -27,18 +27,23 @@ Make sure you have the following in your system:
 ### Installation & Building
 
 1, **Clone the repository:**
+```bash
+git clone https://github.com/4t4lss/HexGame
+```
 
 2, **Configure the project:**
-
-3, **Run executable**
 ```bash
 cmake --preset <your system> .
 ```
+
 3, **Build the project:**
-    Compile the source code using preset.
 ```bash
 cmake --build --preset <your system>
 ```
+
+4, **Run executable**
+Depends on your system.
+
 ### Examples for different machines:
 
 EX for windows:
