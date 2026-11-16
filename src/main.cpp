@@ -11,7 +11,9 @@
 #include "GameLogic.h"
 #include "TestInput.h"
 #include "TestOutput.h"
-#include <cassert>
+#include "WindowManager.h"
+#include "SDLInput.h"
+#include "SDLOutput.h"
 
 /*
  * Data Abstraction:
@@ -39,12 +41,18 @@
 
 int main(int argc, char* argv[]) {
 	//Data Abstraction
-    TestInput* input;
-    TestOutput* output;
-    //WindowManager* wm;
-    assert(argc > 1);
-    input = new TestInput();
-    output = new TestOutput(std::cout);
+    InputInterface* input;
+    OutputInterface* output;
+    WindowManager* wm = nullptr;
+    if(argc > 1) {
+        input = new TestInput();
+        output = new TestOutput(std::cout);
+    }
+    else {
+        wm = new WindowManager();
+        input = new SDLInput(wm);
+        output = new SDLOutput(wm);
+    }
 
     GameLogic game(input->getBoardSize());
 

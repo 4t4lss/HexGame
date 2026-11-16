@@ -10,9 +10,8 @@
  */
 #include "WindowManager.h"
 
-WindowManager::WindowManager(size_t boardSize) : 
+WindowManager::WindowManager() : 
     SDL_Plotter(HEIGHT, WIDTH, false) {
-    newSize(boardSize);
 }
 
 WindowManager::~WindowManager() {

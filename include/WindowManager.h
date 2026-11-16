@@ -18,8 +18,9 @@
 const float SQRT_3 = 1.73205080757;
 
 class WindowManager : public SDL_Plotter {
-
     public:
+        const size_t FPS = 30;
+        const size_t MSPF = 1000/FPS;
         const size_t WIDTH = 900;
         const size_t HEIGHT = 900;
         const color PLAYER1_COLOR(255, 0, 0);
@@ -29,7 +30,7 @@ class WindowManager : public SDL_Plotter {
         const size_t BOARD_VERTICAL_SHIFT  = 0;;
         size_t CELL_RADIUS;
 
-        WindowManager(size_t boardSize);
+        WindowManager();
         ~WindowManager();
 
         void newSize(size_t boardSize);
