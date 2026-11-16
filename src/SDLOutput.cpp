@@ -1,6 +1,6 @@
 #include "SDLOutput.h"
 
-void drawLine(SDL_Plotter& plotter, point pos1, point pos2, color color, int size) {
+void SDLOutput::drawLine(SDL_Plotter& plotter, point pos1, point pos2, color color, int size) {
     int dx = abs(pos2.x - pos1.x);
     int dy = abs(pos2.y - pos1.y);
     int sx, sy;
@@ -47,7 +47,7 @@ void drawLine(SDL_Plotter& plotter, point pos1, point pos2, color color, int siz
 
 }
 
-void drawHexagon(SDL_Plotter& plotter, point pos, color color, color fillColor, int radius) {
+void SDLOutput::drawHexagon(SDL_Plotter& plotter, point pos, color color, color fillColor, int radius) {
     for(int i = 0; i < 6; i++) {
         point pos1(pos.x + cos(i * PI / 3) * radius, pos.y + sin(i * PI / 3) * radius);
         point pos2(pos.x + cos((i+1) * PI / 3) * radius, pos.y + sin((i+1) * PI / 3) * radius);
@@ -59,7 +59,7 @@ void drawHexagon(SDL_Plotter& plotter, point pos, color color, color fillColor, 
 
 }
 
-void fillHexagon(SDL_Plotter& plotter, color color, point pos, int radius) {
+void SDLOutput::fillHexagon(SDL_Plotter& plotter, color color, point pos, int radius) {
     for (int y = -radius; y < radius; ++y) {
         for (int x = -radius; x < radius; ++x) {
             if (abs(y) <= -1 * sqrt(3) * (abs(x) - radius) &&
@@ -73,19 +73,19 @@ void fillHexagon(SDL_Plotter& plotter, color color, point pos, int radius) {
     }
 }
 
-void drawCell(Cell c, Player p){
+void SDLOutput::drawCell(Cell c, Player p){
     //IMPLEMENT ME
     return;
 }
 
-SDLOutput (WindowManager* wm){
+SDLOutput::SDLOutput (WindowManager* wm){
     //IMPLEMENT ME
 }
 
-~SDLOutput(){
+SDLOutput::~SDLOutput(){
     //IMPLEMENT ME
 }
 
-void output(GameLogic gl, Move lastValidMove){
+void SDLOutput::output(GameLogic gl, Move lastValidMove){
     //IMPLEMENT ME
 }
