@@ -78,7 +78,7 @@ void drawCell(Cell c, Player p){
     return;
 }
 
-SDLOutput (WindowManager& wm){
+SDLOutput (WindowManager* wm){
     //IMPLEMENT ME
 }
 
@@ -86,6 +86,6 @@ SDLOutput (WindowManager& wm){
     //IMPLEMENT ME
 }
 
-void output(Board board, Cell lastMove){
+void output(GameLogic gl, Move lastValidMove){
     //IMPLEMENT ME
 }

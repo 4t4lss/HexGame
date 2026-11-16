@@ -7,7 +7,7 @@
 
 class SDLInput : public InputInterface {
     private:
-        WindowManager wm;
+        WindowManager* wm;
     public:
         /*
          * description:
@@ -15,7 +15,7 @@ class SDLInput : public InputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        SDLInput (WindowManager& wm);
+        SDLInput (WindowManager* wm);
         /*
          * description:
          * return: 
@@ -29,7 +29,7 @@ class SDLInput : public InputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        Cell getMove(Player p);
+        Move getMove();
         /*
          * description:
          * return: 

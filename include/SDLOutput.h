@@ -10,7 +10,7 @@
 
 class SDLOutput : public OutputInterface {
     private:
-        WindowManager wm;
+        WindowManager* wm;
         /*
          * description:
          * return: 
@@ -28,7 +28,7 @@ class SDLOutput : public OutputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        SDLOutput (WindowManager& wm);
+        SDLOutput (WindowManager* wm);
         /*
          * description:
          * return: 
@@ -42,7 +42,7 @@ class SDLOutput : public OutputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        void output(Board board, Cell lastMove);
+        void output(GameLogic gl, Move lastValidMove);
 };
 
 #endif
