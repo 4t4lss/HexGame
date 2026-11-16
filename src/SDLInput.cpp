@@ -22,6 +22,7 @@ SDLInput::~SDLInput() {
  * postcondition:                                                   
  */
 Move SDLInput::getMove() {
+    return Move();
 }
 /*
  * description:
@@ -30,6 +31,7 @@ Move SDLInput::getMove() {
  * postcondition:                                                   
  */
 size_t SDLInput::getBoardSize() {
+    return 0;
 }
 /*
  * description:
@@ -38,4 +40,5 @@ size_t SDLInput::getBoardSize() {
  * postcondition:                                                   
  */
 bool SDLInput::isRunning() {
+    return true;
 }
