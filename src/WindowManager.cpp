@@ -15,7 +15,6 @@ WindowManager::WindowManager() :
 }
 
 WindowManager::~WindowManager() {
-    delete g;
 }
 
 void WindowManager::newSize(size_t boardSize) {
