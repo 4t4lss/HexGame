@@ -21,11 +21,11 @@ target_sources(hexLauncher
         src/main.cpp
         src/GameLogic.cpp
         # src/SDLInput.cpp
-        # src/SDLOutput.cpp
-        # src/SDL_Plotter.cpp
+        src/SDLOutput.cpp
+        src/SDL_Plotter.cpp
         src/TestInput.cpp
         src/TestOutput.cpp
-        # src/WindowManager.cpp
+        src/WindowManager.cpp
 )
 
 # includes the include folder for header files
