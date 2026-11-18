@@ -15,7 +15,7 @@ class SDLOutput : public OutputInterface {
          * precondition: A board and windowmanager exist, the cell is in bounds
          * postcondition: The cell is redrawn with the player colour
         */
-        void drawCell(Cell c, Player p);
+        void drawCell(int row, int col, int p);
         /*
          * description: Uses plotter to draw a line from pos1 to pos2
          *              size is the line's thickness and color is its colour
@@ -35,7 +35,7 @@ class SDLOutput : public OutputInterface {
          * postcondition: Hexagon is drawn on plotter.
          *                Doesn't update the screen.
         */
-        void drawHexagon(point pos, color boarderColor, color fillColor, size_t radius);
+        void drawHexagon(const point& pos, const color& borderColor, const color& fillColor, const int& radius);
         /*
          * description: Fills an existing hexagon's area with color
          *              pos is hexagon's centre
@@ -45,7 +45,7 @@ class SDLOutput : public OutputInterface {
          *               A hexagon with centre at pos of radius radius exists
          * postcondition: Existing hexagon is edited to be filled with color
         */
-        void fillHexagon(color color, point pos, size_t radius);
+        void fillHexagon(color color, point pos, int radius);
     public:
         /*
          * description:
