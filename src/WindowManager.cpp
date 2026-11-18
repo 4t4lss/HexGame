@@ -16,5 +16,6 @@ WindowManager::WindowManager() :
 }
 
 void WindowManager::newSize(size_t boardSize) {
-    CELL_RADIUS = static_cast<size_t>(BOARD_SIZE_SCALE * WIDTH * 3/(5 * boardSize));
+    CELL_RADIUS = (int)(BOARD_SIZE_SCALE * WIDTH * 3/(10 * boardSize));
+    BOARD_SIZE = boardSize;
 }

@@ -1,5 +1,6 @@
 #include "SDLOutput.h"
-
+#include <iostream>
+using namespace std;
 
 bool operator==(const color& lhs, const color& rhs) {
     return lhs.R == rhs.R &&
@@ -54,19 +55,20 @@ void SDLOutput::drawLine(point pos1, point pos2, color lineColor, int size) {
 
 }
 
-void SDLOutput::drawHexagon(point pos, color boarderColor, color fillColor, size_t radius) {
+void SDLOutput::drawHexagon(const point& pos, const color& borderColor, const color& fillColor, const int& radius) {
+    cout << "Draw Hexagon Called At (" << pos.x << "," << pos.y << ")" << endl;
     for(int i = 0; i < 6; i++) {
         point pos1(pos.x + cos(i * PI / 3) * radius, pos.y + sin(i * PI / 3) * radius);
         point pos2(pos.x + cos((i+1) * PI / 3) * radius, pos.y + sin((i+1) * PI / 3) * radius);
         //makeBox(plotter, pos1, color, 5, 3);
-        drawLine(pos1, pos2, boarderColor, 2);
+        drawLine(pos1, pos2, borderColor, 2);
     }
     //fill in hexagon logic:
     fillHexagon(fillColor, pos, radius);
 
 }
 
-void SDLOutput::fillHexagon(color fillColor, point pos, size_t radius) {
+void SDLOutput::fillHexagon(color fillColor, point pos, int radius) {
     for (int y = -radius; y < radius; ++y) {
         for (int x = -radius; x < radius; ++x) {
             if (abs(y) <= -1 * sqrt(3) * (abs(x) - radius) &&
@@ -80,12 +82,25 @@ void SDLOutput::fillHexagon(color fillColor, point pos, size_t radius) {
     }
 }
 
-void SDLOutput::drawCell(Cell c, Player p){
-    //IMPLEMENT ME
-    return;
+void SDLOutput::drawCell(int row, int col, int p) {
+        int posX = -round(3.0 * wm->CELL_RADIUS* (col - row) / 2); 
+        int posY = -round((SQRT_3 * wm->CELL_RADIUS) * (wm->BOARD_SIZE - 1.0 - row - col) / 2);
+        point pos(posX + wm->CENTERX, posY + wm->CENTERY);
+        color cellCol;
+        if (p == 0) {
+            cellCol = wm->NOPLAYER_COLOR; //neutral 
+        }
+        else if (p == 1) {
+            cellCol = wm->PLAYER1_COLOR;
+        }
+        else {
+            cellCol = wm->PLAYER2_COLOR;
+        }
+
+        drawHexagon(pos, wm->BORDER_COLOR, cellCol, wm->CELL_RADIUS);  
 }
 
-SDLOutput::SDLOutput (WindowManager* wm){
+SDLOutput::SDLOutput (WindowManager* wm) : wm{wm}{
     //IMPLEMENT ME
 }
 
@@ -94,27 +109,18 @@ SDLOutput::~SDLOutput(){
 }
 
 void SDLOutput::output(GameLogic gl, Move lastValidMove){
-   
-    size_t radius = wm->CELL_RADIUS;
-    for (size_t r = 0; r < gl.getBoardSize(); ++r) {
-        for (size_t c = 0; c < gl.getBoardSize(); ++c) {
-            int posX = round(((3.0/4) * radius) * (c - r)); 
-            int posY = round((sqrt(3) * radius) * ((gl.getBoardSize() - 1.0 - r - c) / 4));
-            point pos(posX, posY);
-           int owner = gl.getCellOwner(r, c);
-           color cellCol;
-            if (owner == 0) {
-                cellCol = wm->NOPLAYER_COLOR; //neutral 
-            }
-            else if (owner == 1) {
-                cellCol = wm->PLAYER1_COLOR;
-            }
-            else {
-                cellCol = wm->PLAYER2_COLOR;
-            }
+    cout << "Output called" << endl;
 
-          drawHexagon(pos, wm->BORDER_COLOR, cellCol, radius);  
+    int radius = wm->CELL_RADIUS;
+    int size = gl.getBoardSize();
+    cout << "Radius got: " << radius << endl;
+    for (int c = 0; c < size; ++c) {
+        for (int r = 0; r < size; ++r) {
+            Cell h(r,c);
+            int p = gl.getCellOwner(r,c);
+            drawCell(r,c,p);
         }
     }
+    wm->update();
 
 }

@@ -55,6 +55,7 @@ int main(int argc, char* argv[]) {
     }
 
     GameLogic game(input->getBoardSize());
+    wm->newSize(game.getBoardSize());
 
     Move move;
     while(input->isRunning()) {
