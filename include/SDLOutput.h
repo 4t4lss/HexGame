@@ -1,3 +1,12 @@
+/*
+ * Author: Sam D'Agostino
+ * Assignment Title: SDL Output
+ * Assignment Description: Generates the window and Displays the board using
+ *  SDL plotter 
+ * Due Date: 11/18/2026
+ * Date Created: 11/18/2026
+ * Date Last Modified: 11/18/2026
+ */
 #ifndef SDL_OUTPUT
 #define SDL_OUTPUT
 
@@ -35,7 +44,8 @@ class SDLOutput : public OutputInterface {
          * postcondition: Hexagon is drawn on plotter.
          *                Doesn't update the screen.
         */
-        void drawHexagon(const point& pos, const color& borderColor, const color& fillColor, const int& radius);
+        void drawHexagon(const point& pos, const color& borderColor,
+                const color& fillColor, const int& radius);
         /*
          * description: Fills an existing hexagon's area with color
          *              pos is hexagon's centre

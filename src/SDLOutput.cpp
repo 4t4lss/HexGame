@@ -1,6 +1,13 @@
+/*
+ * Author: Sam D'Agostino
+ * Assignment Title: SDL Output
+ * Assignment Description: Generates the window and Displays the board using
+ *  SDL plotter 
+ * Due Date: 11/18/2026
+ * Date Created: 11/18/2026
+ * Date Last Modified: 11/18/2026
+ */
 #include "SDLOutput.h"
-#include <iostream>
-using namespace std;
 
 bool operator==(const color& lhs, const color& rhs) {
     return lhs.R == rhs.R &&
@@ -55,15 +62,15 @@ void SDLOutput::drawLine(point pos1, point pos2, color lineColor, int size) {
 
 }
 
-void SDLOutput::drawHexagon(const point& pos, const color& borderColor, const color& fillColor, const int& radius) {
-    cout << "Draw Hexagon Called At (" << pos.x << "," << pos.y << ")" << endl;
+void SDLOutput::drawHexagon(const point& pos, const color& borderColor,
+        const color& fillColor, const int& radius) {
     for(int i = 0; i < 6; i++) {
-        point pos1(pos.x + cos(i * PI / 3) * radius, pos.y + sin(i * PI / 3) * radius);
-        point pos2(pos.x + cos((i+1) * PI / 3) * radius, pos.y + sin((i+1) * PI / 3) * radius);
-        //makeBox(plotter, pos1, color, 5, 3);
+        point pos1(pos.x + cos(i * PI / 3) * radius,
+                pos.y + sin(i * PI / 3) * radius);
+        point pos2(pos.x + cos((i+1) * PI / 3) * radius,
+                pos.y + sin((i+1) * PI / 3) * radius);
         drawLine(pos1, pos2, borderColor, 2);
     }
-    //fill in hexagon logic:
     fillHexagon(fillColor, pos, radius);
 
 }
@@ -84,7 +91,8 @@ void SDLOutput::fillHexagon(color fillColor, point pos, int radius) {
 
 void SDLOutput::drawCell(int row, int col, int p) {
         int posX = -round(3.0 * wm->CELL_RADIUS* (col - row) / 2); 
-        int posY = -round((SQRT_3 * wm->CELL_RADIUS) * (wm->BOARD_SIZE - 1.0 - row - col) / 2);
+        int posY = -round((SQRT_3 * wm->CELL_RADIUS) *
+                (wm->BOARD_SIZE - 1.0 - row - col) / 2);
         point pos(posX + wm->CENTERX, posY + wm->CENTERY);
         color cellCol;
         if (p == 0) {
@@ -109,11 +117,9 @@ SDLOutput::~SDLOutput(){
 }
 
 void SDLOutput::output(GameLogic gl, Move lastValidMove){
-    cout << "Output called" << endl;
 
     int radius = wm->CELL_RADIUS;
     int size = gl.getBoardSize();
-    cout << "Radius got: " << radius << endl;
     for (int c = 0; c < size; ++c) {
         for (int r = 0; r < size; ++r) {
             Cell h(r,c);
