@@ -22,7 +22,23 @@ SDLInput::~SDLInput() {
  * postcondition:                                                   
  */
 Move SDLInput::getMove() {
-    return Move();
+    int x, y, row, col;
+
+    Move move;
+
+    // call getMouseClick on SDL_Plotter object
+    wm.getMouseClick(x, y);
+
+    row = (2 * -2 - (2 * y - WINDOW_ROWS + 
+          (WINDOW_COLS - 2 * x) / 
+          (radius * SQRT_3))) / 4
+    
+    col = (2 * (WINDOW_COLS - 2 * x)) / (3 * radius) + row
+
+    move.c.x = row;
+    move.c.y = col;
+
+    return move;
 }
 /*
  * description:
