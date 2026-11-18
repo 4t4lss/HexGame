@@ -7,33 +7,37 @@ SDLInput::~SDLInput() {
 }
 
 Move SDLInput::getMove() {
-    int x, y, row, col;
+    int x, y;
+    float row, col;
 
     // store board size for coordinate conversion
-    size_t size = wm->boardSize;
+    size_t size = wm->BOARD_SIZE;
+    
 
     // instantiate move object
     Move move;
+    while(!wm->getQuit()){
+        while(wm->mouseClick()){
+            point click{wm->getMouseClick()};
 
-    // ***CALL MOUSE CLICK HELPER HERE***
-    // temporary
-    wm->getMouseClick(x, y);
+            row = (2 * size - 2 - (2 * click.y - wm->HEIGHT + (wm->WIDTH - 2 * click.x) / 
+                  (wm->CELL_RADIUS * SQRT_3))) / 4;
+            
+            col = (2 * (wm->WIDTH - 2 * click.x)) / (3.0 * wm->CELL_RADIUS) + row;
 
-    // convert raw click coordinates to board coordinates
-    row = (2 * size - 2 - (2 * y - wm->HEIGHT + (wm->WIDTH - 2 * x) / 
-          (wm->CELL_RADIUS * SQRT_3))) / 4;
-    
-    col = (2 * (wm->WIDTH - 2 * x)) / (3 * wm->CELL_RADIUS) + row;
-
-    // convert coordinates to be at center of move's cell member
-    move.c.row = row;
-    move.c.col = col;
+            move.c.col = col;
+            move.c.row = row;
+        }
+    }
 
     return move;
 }
 
 size_t SDLInput::getBoardSize() {
-    return wm->boardSize;
+    const size_t TEST_SIZE = 7;
+    wm->newSize(TEST_SIZE);
+
+    return TEST_SIZE;
 }
 
 bool SDLInput::isRunning() {
