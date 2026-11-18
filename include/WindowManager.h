@@ -26,7 +26,9 @@ class WindowManager : public SDL_Plotter {
         const size_t HEIGHT = 900;
         const color PLAYER1_COLOR{255, 0, 0};
         const color PLAYER2_COLOR{0,0,255};
+        const color NOPLAYER_COLOR{180,180,180};
         const color BACKGROUND_COLOR{255,255,255};
+        const color BORDER_COLOR{0,0,0};
         const float BOARD_SIZE_SCALE = 0.9;
         const size_t BOARD_VERTICAL_SHIFT  = 0;;
         size_t CELL_RADIUS;

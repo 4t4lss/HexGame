@@ -24,7 +24,7 @@ class SDLOutput : public OutputInterface {
          * postcondition: A new line is drawn on the plotter. 
          *                Doesn't update the screen.
         */
-        void drawLine(SDL_Plotter& plotter, point pos1, point pos2, color color, int size);
+        void drawLine(point pos1, point pos2, color color, int size);
         /*
          * description: Uses plotter to draw a hexagon with centrepoint pos
          *              borderColor and fillColor determine the colours of the
@@ -35,7 +35,7 @@ class SDLOutput : public OutputInterface {
          * postcondition: Hexagon is drawn on plotter.
          *                Doesn't update the screen.
         */
-        void drawHexagon(SDL_Plotter& plotter, point pos, color boarderColor, color fillColor, int radius);
+        void drawHexagon(point pos, color boarderColor, color fillColor, size_t radius);
         /*
          * description: Fills an existing hexagon's area with color
          *              pos is hexagon's centre
@@ -45,7 +45,7 @@ class SDLOutput : public OutputInterface {
          *               A hexagon with centre at pos of radius radius exists
          * postcondition: Existing hexagon is edited to be filled with color
         */
-        void fillHexagon(SDL_Plotter& plotter, color color, point pos, int radius);
+        void fillHexagon(color color, point pos, size_t radius);
     public:
         /*
          * description:
