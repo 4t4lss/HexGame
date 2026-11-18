@@ -50,8 +50,8 @@ int main(int argc, char* argv[]) {
     }
     else {
         wm = new WindowManager();
-        input = new TestInput();
-        output = new SDLOutput(wm);
+        input = new SDLInput(wm);
+        output = new TestOutput(std::cout);
     }
 
     GameLogic game(input->getBoardSize());
