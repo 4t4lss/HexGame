@@ -22,8 +22,8 @@ class WindowManager : public SDL_Plotter {
     public:
         const size_t FPS = 30;
         const size_t MSPF = 1000/FPS;
-        const size_t WIDTH = 900;
-        const size_t HEIGHT = 900;
+        static const int WIDTH = 900;
+        static const int HEIGHT = 900;
         const color PLAYER1_COLOR{255, 0, 0};
         const color PLAYER2_COLOR{0,0,255};
         const color NOPLAYER_COLOR{180,180,180};
@@ -34,7 +34,6 @@ class WindowManager : public SDL_Plotter {
         size_t CELL_RADIUS;
 
         WindowManager();
-        ~WindowManager();
 
         void newSize(size_t boardSize);
 };

@@ -12,9 +12,7 @@
 
 WindowManager::WindowManager() : 
     SDL_Plotter(HEIGHT, WIDTH, false) {
-}
-
-WindowManager::~WindowManager() {
+        setQuit(false);
 }
 
 void WindowManager::newSize(size_t boardSize) {
