@@ -51,10 +51,11 @@ int main(int argc, char* argv[]) {
     else {
         wm = new WindowManager();
         input = new SDLInput(wm);
-        output = new TestOutput(std::cout);
+        output = new SDLOutput(wm);
     }
 
     GameLogic game(input->getBoardSize());
+    wm->newSize(game.getBoardSize());
 
     Move move;
     while(input->isRunning()) {

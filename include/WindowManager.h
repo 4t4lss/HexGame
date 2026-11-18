@@ -22,7 +22,7 @@ class WindowManager : public SDL_Plotter {
     public:
         const size_t FPS = 30;
         const size_t MSPF = 1000/FPS;
-        static const int WIDTH = 900;
+        static const int WIDTH = 1200;
         static const int HEIGHT = 900;
         const color PLAYER1_COLOR{255, 0, 0};
         const color PLAYER2_COLOR{0,0,255};
@@ -31,7 +31,11 @@ class WindowManager : public SDL_Plotter {
         const color BORDER_COLOR{0,0,0};
         const float BOARD_SIZE_SCALE = 0.9;
         const size_t BOARD_VERTICAL_SHIFT  = 0;
-        size_t CELL_RADIUS;
+        int CELL_RADIUS;
+        int BOARD_SIZE;
+
+        static const int CENTERX = WIDTH/2;
+        static const int CENTERY = HEIGHT/2;
 
         WindowManager();
 
