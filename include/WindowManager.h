@@ -30,7 +30,7 @@ class WindowManager : public SDL_Plotter {
         const color BACKGROUND_COLOR{255,255,255};
         const color BORDER_COLOR{0,0,0};
         const float BOARD_SIZE_SCALE = 0.9;
-        const size_t BOARD_VERTICAL_SHIFT  = 0;;
+        const size_t BOARD_VERTICAL_SHIFT  = 0;
         size_t CELL_RADIUS;
 
         WindowManager();

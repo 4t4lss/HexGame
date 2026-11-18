@@ -1,60 +1,42 @@
 #include "SDLInput.h"
-/*
- * description:
- * return: 
- * precondition:
- * postcondition:                                                   
- */
-SDLInput::SDLInput (WindowManager* wm) {
+
+SDLInput::SDLInput (WindowManager* wm) : wm(wm) {
+
 }
-/*
- * description:
- * return: 
- * precondition:
- * postcondition:                                                   
- */
+
 SDLInput::~SDLInput() {
 }
-/*
- * description:
- * return: 
- * precondition:
- * postcondition:                                                   
- */
+
 Move SDLInput::getMove() {
     int x, y, row, col;
 
+    // instantiate move object
     Move move;
 
-    // call getMouseClick on SDL_Plotter object
-    wm.getMouseClick(x, y);
+    // ***CALL MOUSE CLICK HELPER HERE***
 
-    row = (2 * -2 - (2 * y - WINDOW_ROWS + 
-          (WINDOW_COLS - 2 * x) / 
-          (radius * SQRT_3))) / 4
+    // convert raw click coordinates to board coordinates
+    row = (2 * getBoardSize() - 2 - (2 * y - wm->HEIGHT + 
+          (wm->WIDTH - 2 * x) / 
+          (wm->CELL_RADIUS * SQRT_3))) / 4
     
-    col = (2 * (WINDOW_COLS - 2 * x)) / (3 * radius) + row
+    col = (2 * (wm->WIDTH - 2 * x)) / (3 * wm->CELL_RADIUS) + row
 
-    move.c.x = row;
-    move.c.y = col;
+    // convert coordinates to be at center of move's cell member
+    m.c.x = 3 * wm->CELL_RADIUS * (row - col) / 4;
+    m.c.y = SQRT_3 * wm->CELL_RADIUS * (getBoardSize() - 1 - row - col) / 4;
+
 
     return move;
 }
-/*
- * description:
- * return: 
- * precondition:
- * postcondition:                                                   
- */
+
 size_t SDLInput::getBoardSize() {
-    return 0;
+    const size_t TEST_SIZE = 7;
+    wm.newSize(TEST_SIZE);
+
+    return TEST_SIZE;
 }
-/*
- * description:
- * return: 
- * precondition:
- * postcondition:                                                   
- */
+
 bool SDLInput::isRunning() {
     return true;
 }
