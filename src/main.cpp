@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     }
     else {
         wm = new WindowManager();
-        input = new SDLInput(wm);
+        input = new TestInput();
         output = new SDLOutput(wm);
     }
 
