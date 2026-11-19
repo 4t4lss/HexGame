@@ -67,7 +67,7 @@ class SDLOutput : public OutputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        void output(GameLogic gl, Move lastValidMove);
+        void output(const GameLogic& gl, const Move& lastValidMove);
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "SDLOutput.h"
+#include <iostream>
 
 bool operator==(const color& lhs, const color& rhs) {
     return lhs.R == rhs.R &&
@@ -106,16 +107,20 @@ SDLOutput::~SDLOutput(){
     //IMPLEMENT ME
 }
 
-void SDLOutput::output(GameLogic gl, Move lastValidMove){
-    int radius = wm->CELL_RADIUS;
-    int size = gl.getBoardSize();
-    for (int c = 0; c < size; ++c) {
-        for (int r = 0; r < size; ++r) {
-            Cell h(r,c);
-            int p = gl.getCellOwner(r,c);
-            drawCell(r,c,p);
+void SDLOutput::output(const GameLogic& gl, const Move& lastMove){
+    std::cout << "." << std::flush;
+    if(lastMove.valid) {
+        int radius = wm->CELL_RADIUS;
+        int size = gl.getBoardSize();
+        for (int c = 0; c < size; ++c) {
+            for (int r = 0; r < size; ++r) {
+                int p = gl.getCellOwner(r,c);
+                drawCell(r,c,p);
+            }
         }
+        std::cout << "Output" << std::endl;
     }
     wm->update();
+    wm->Sleep(wm->MSPF);
 
 }

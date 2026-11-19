@@ -6,8 +6,7 @@ TestInput::TestInput() {
 TestInput::~TestInput() {
 }
 
-Move TestInput::getMove() {
-    Move move;
+bool TestInput::getMove(Move& move) {
     int row, col;
     int player;
 
@@ -18,7 +17,7 @@ Move TestInput::getMove() {
 
     //std::cout << "Player: " << player+0 << " at " << row << " " << col << std::endl;
 
-    return move;
+    return true; //A move always exists in test mode
 }
 
 size_t TestInput::getBoardSize() {

@@ -57,20 +57,23 @@ int main(int argc, char* argv[]) {
     GameLogic game(input->getBoardSize());
 
     Move move;
+    bool moveExists;
     while(input->isRunning()) {
         //User Input
-        move = input->getMove();
-        if(argc == 1){
-            move.p = game.getCurrentPlayer();
-        }
-        
-        //Data Processing
-        if(game.validateMove(move)) {
-            game.writeMove(move);
-            game.nextTurn();
-        }
-        else {
-            std::cout << move.result << std::endl;
+        moveExists = input->getMove(move);
+        if(moveExists) {
+            if(argc == 1){
+                move.p = game.getCurrentPlayer();
+            }
+            
+            //Data Processing
+            if(game.validateMove(move)) {
+                game.writeMove(move);
+                game.nextTurn();
+            }
+            else {
+                std::cout << move.result << std::endl;
+            }
         }
 
         //Output

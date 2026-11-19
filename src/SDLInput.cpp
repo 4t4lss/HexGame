@@ -7,29 +7,27 @@ SDLInput::SDLInput (WindowManager* wm) : wm(wm) {
 SDLInput::~SDLInput() {
 }
 
-Move SDLInput::getMove() {
-    int row, col;
+bool SDLInput::getMove(Move& move) {
+    bool moveExists = wm->mouseClick();
 
-    // store board size for coordinate conversion
-    size_t size = wm->BOARD_SIZE;
+    if(moveExists){
+        int row, col;
 
-    // instantiate move object
-    Move move;
+        // store board size for coordinate conversion
+        size_t size = wm->BOARD_SIZE;
+        point click = wm->getMouseClick();
+        row = -(SQRT_3*wm->HEIGHT + wm->WIDTH - 2 * click.x - 2 * SQRT_3 * click.y) /
+            (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
+        col = -(SQRT_3*wm->HEIGHT - wm->WIDTH + 2 * click.x - 2 * SQRT_3 * click.y) /
+            (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
 
-    while(isRunning() && !wm->mouseClick()){
-        wm->Sleep(wm->MSPF);
+        move.c.col = col;
+        move.c.row = row;
+        std::cout << "\n(" << click.x << "," << click.y << ") -> (" << move.c.row << "," << move.c.col << ")" << std::endl;
     }
-    point click = wm->getMouseClick();
-    row = -(SQRT_3*wm->HEIGHT + wm->WIDTH - 2 * click.x - 2 * SQRT_3 * click.y) /
-        (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
-    col = -(SQRT_3*wm->HEIGHT - wm->WIDTH + 2 * click.x - 2 * SQRT_3 * click.y) /
-        (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
+    move.valid = moveExists;
 
-    move.c.col = col;
-    move.c.row = row;
-    std::cout << "\n(" << click.x << "," << click.y << ") -> (" << move.c.row << "," << move.c.col << ")" << std::endl;
-
-    return move;
+    return moveExists;
 }
 
 size_t SDLInput::getBoardSize() {

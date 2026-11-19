@@ -41,7 +41,7 @@ class TestOutput : public OutputInterface {
         *                output stream                 
         * 
         */
-        void output(GameLogic gl, Move lastValidMove);
+        void output(const GameLogic& gl, const Move& lastMove);
 };
 
 #endif
