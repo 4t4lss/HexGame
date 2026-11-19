@@ -56,7 +56,7 @@ void SDLOutput::drawLine(point pos1, point pos2, color lineColor, int size) {
 }
 
 void SDLOutput::drawHexagon(const point& pos, const color& borderColor, const color& fillColor, const int& radius) {
-    cout << "Draw Hexagon Called At (" << pos.x << "," << pos.y << ")" << endl;
+    // cout << "Draw Hexagon Called At (" << pos.x << "," << pos.y << ")" << endl;
     for(int i = 0; i < 6; i++) {
         point pos1(pos.x + cos(i * PI / 3) * radius, pos.y + sin(i * PI / 3) * radius);
         point pos2(pos.x + cos((i+1) * PI / 3) * radius, pos.y + sin((i+1) * PI / 3) * radius);

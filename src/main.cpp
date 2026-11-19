@@ -60,6 +60,9 @@ int main(int argc, char* argv[]) {
     Move move;
     while(input->isRunning()) {
         //User Input
+        if(argc == 1){
+            move.p = game.getCurrentPlayer();
+        }
         move = input->getMove();
         
         //Data Processing
