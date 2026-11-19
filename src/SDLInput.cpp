@@ -17,7 +17,7 @@ Move SDLInput::getMove() {
     // instantiate move object
     Move move;
 
-    if(wm->mouseClick()){
+    while(wm->mouseClick()){
         point click{wm->getMouseClick()};
 
         row = (2 * size - 2 - (2 * click.y - wm->HEIGHT + (wm->WIDTH - 2 * click.x) / 
