@@ -71,9 +71,6 @@ int main(int argc, char* argv[]) {
                 game.writeMove(move);
                 game.nextTurn();
             }
-            else {
-                std::cout << move.result << std::endl;
-            }
         }
 
         //Output

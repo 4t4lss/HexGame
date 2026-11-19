@@ -108,7 +108,6 @@ SDLOutput::~SDLOutput(){
 }
 
 void SDLOutput::output(const GameLogic& gl, const Move& lastMove){
-    std::cout << "." << std::flush;
     if(lastMove.valid) {
         int radius = wm->CELL_RADIUS;
         int size = gl.getBoardSize();
@@ -118,7 +117,6 @@ void SDLOutput::output(const GameLogic& gl, const Move& lastMove){
                 drawCell(r,c,p);
             }
         }
-        std::cout << "Output" << std::endl;
     }
     wm->update();
     wm->Sleep(wm->MSPF);
