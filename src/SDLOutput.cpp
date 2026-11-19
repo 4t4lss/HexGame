@@ -1,6 +1,4 @@
 #include "SDLOutput.h"
-#include <iostream>
-using namespace std;
 
 bool operator==(const color& lhs, const color& rhs) {
     return lhs.R == rhs.R &&
@@ -109,11 +107,8 @@ SDLOutput::~SDLOutput(){
 }
 
 void SDLOutput::output(GameLogic gl, Move lastValidMove){
-    cout << "Output called" << endl;
-
     int radius = wm->CELL_RADIUS;
     int size = gl.getBoardSize();
-    cout << "Radius got: " << radius << endl;
     for (int c = 0; c < size; ++c) {
         for (int r = 0; r < size; ++r) {
             Cell h(r,c);

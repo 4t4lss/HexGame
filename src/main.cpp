@@ -55,20 +55,22 @@ int main(int argc, char* argv[]) {
     }
 
     GameLogic game(input->getBoardSize());
-    wm->newSize(game.getBoardSize());
 
     Move move;
     while(input->isRunning()) {
         //User Input
+        move = input->getMove();
         if(argc == 1){
             move.p = game.getCurrentPlayer();
         }
-        move = input->getMove();
         
         //Data Processing
         if(game.validateMove(move)) {
             game.writeMove(move);
             game.nextTurn();
+        }
+        else {
+            std::cout << move.result << std::endl;
         }
 
         //Output
