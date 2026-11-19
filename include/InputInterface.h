@@ -28,7 +28,7 @@ class InputInterface {
          * postcondition: Created a move object initialized with the
          *          inputed turn data
         */
-        virtual Move getMove() = 0;
+        virtual bool getMove(Move& m) = 0;
         /*
          * description: Checks if the input source is still active, 
          *          Ignores the next input

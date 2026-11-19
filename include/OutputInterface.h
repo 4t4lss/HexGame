@@ -22,7 +22,7 @@ class OutputInterface {
          * postcondition: The results of the turn have been outputted to
          *             the active Output mode
         */
-        virtual void output(GameLogic gl, Move lastValidMove) = 0;
+        virtual void output(const GameLogic& gl, const Move& lastValidMove) = 0;
 };
 
 #endif

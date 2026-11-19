@@ -6,7 +6,7 @@ TestOutput::TestOutput(std::ostream& outStream) : out(outStream), moveCount{0} {
 TestOutput::~TestOutput() {
 }
 
-void TestOutput::output(GameLogic gl, Move lastMove) {
+void TestOutput::output(const GameLogic& gl, const Move& lastMove) {
     moveCount++;
     out << "MOVE " << moveCount << ": " << (lastMove.valid? "ACCEPTED" : "REJECTED") << std::endl;
     //if(!lastMove.valid) out << "REASON: " << lastMove.result << std::endl;

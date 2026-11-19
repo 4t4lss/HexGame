@@ -50,22 +50,27 @@ int main(int argc, char* argv[]) {
     }
     else {
         wm = new WindowManager();
-        input = new TestInput();
+        input = new SDLInput(wm);
         output = new SDLOutput(wm);
     }
 
     GameLogic game(input->getBoardSize());
-    wm->newSize(game.getBoardSize());
 
     Move move;
+    bool moveExists;
     while(input->isRunning()) {
         //User Input
-        move = input->getMove();
-        
-        //Data Processing
-        if(game.validateMove(move)) {
-            game.writeMove(move);
-            game.nextTurn();
+        moveExists = input->getMove(move);
+        if(moveExists) {
+            if(argc == 1){
+                move.p = game.getCurrentPlayer();
+            }
+            
+            //Data Processing
+            if(game.validateMove(move)) {
+                game.writeMove(move);
+                game.nextTurn();
+            }
         }
 
         //Output

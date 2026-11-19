@@ -32,10 +32,9 @@ class TestInput : public InputInterface {
         *              into cell object
         * return: Cell
         * precondition: cin must contain input
-        * postcondition: input data is read into Cell object                
-        * 
+        * postcondition: input data is read into Cell object
         */
-        Move getMove();
+        bool getMove(Move& m);
 
         /*
         * description: reads the board size from test input

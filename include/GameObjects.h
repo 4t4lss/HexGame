@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <cmath>
 
 enum Player : char {NONE = 0, PLAYER1 = 1, PLAYER2 = 2};
 

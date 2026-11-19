@@ -29,7 +29,7 @@ class SDLInput : public InputInterface {
          * precondition:
          * postcondition:                                                   
         */
-        Move getMove();
+        bool getMove(Move& m);
         /*
          * description:
          * return: 
