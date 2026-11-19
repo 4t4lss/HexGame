@@ -1,4 +1,5 @@
 #include "SDLInput.h"
+#include <iostream>
 
 SDLInput::SDLInput (WindowManager* wm) : wm(wm) {
 }
@@ -29,7 +30,9 @@ bool SDLInput::getMove(Move& move) {
 }
 
 size_t SDLInput::getBoardSize() {
-    const size_t TEST_SIZE = 7;
+    size_t TEST_SIZE;
+    std::cout << "Enter board size: " << std::flush;
+    std::cin >> TEST_SIZE;
     wm->newSize(TEST_SIZE);
 
     return TEST_SIZE;
