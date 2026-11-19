@@ -1,5 +1,4 @@
 #include "SDLInput.h"
-#include <iostream>
 
 SDLInput::SDLInput (WindowManager* wm) : wm(wm) {
 }
@@ -16,14 +15,13 @@ bool SDLInput::getMove(Move& move) {
         // store board size for coordinate conversion
         size_t size = wm->BOARD_SIZE;
         point click = wm->getMouseClick();
-        row = -(SQRT_3*wm->HEIGHT + wm->WIDTH - 2 * click.x - 2 * SQRT_3 * click.y) /
+        row = (-SQRT_3*wm->HEIGHT - wm->WIDTH + 2 * click.x + 2 * SQRT_3 * click.y) /
             (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
-        col = -(SQRT_3*wm->HEIGHT - wm->WIDTH + 2 * click.x - 2 * SQRT_3 * click.y) /
+        col = (-SQRT_3*wm->HEIGHT + wm->WIDTH - 2 * click.x + 2 * SQRT_3 * click.y) /
             (6 * wm->CELL_RADIUS) + (size-1)/2 + 0.5;
 
         move.c.col = col;
         move.c.row = row;
-        std::cout << "\n(" << click.x << "," << click.y << ") -> (" << move.c.row << "," << move.c.col << ")" << std::endl;
     }
     move.valid = moveExists;
 
